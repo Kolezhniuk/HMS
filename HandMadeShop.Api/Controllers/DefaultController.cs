@@ -16,7 +16,19 @@ namespace HandMadeShop.Api.Controllers
     [ProducesResponseType(StatusCodes.Status200OK)]
     public IActionResult Index()
     {
-      return this.Ok();
+      return this.Json(new {
+        Status = "Success",
+        StatusCode = 200,
+        Response = new
+        {
+          Data = "some data",
+          Headers = new string[]
+          {
+            "header 1",
+            "header 2"
+          }
+        }
+      });
     }
   }
 }
