@@ -21,13 +21,10 @@ namespace HandMadeShop.Api
 
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddSwaggerConfiguration(this.configuration);
+      services.AddSwaggerConfiguration();
       services
         .AddMvc()
         .AddJsonOptions(a => a.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
-
-      if (this.hostingEnvironment.IsDevelopment())
-        services.AddMiniProfiler(options => options.RouteBasePath = "/profiler");
     }
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -35,10 +32,9 @@ namespace HandMadeShop.Api
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
-        app.UseMiniProfiler();
       }
 
-      app.UseSwaggerConfiguration(this.configuration, env);
+      app.UseSwaggerConfiguration();
       app.UseMvc();
     }
   }
