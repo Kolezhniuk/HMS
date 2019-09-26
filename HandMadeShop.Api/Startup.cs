@@ -21,6 +21,13 @@ namespace HandMadeShop.Api
 
     public void ConfigureServices(IServiceCollection services)
     {
+      services.Configure<Domain.Options.StorageContextOptions>(o =>
+      {
+        o.ConnectionString = this.configuration.GetConnectionString("Default");
+      });
+      services.AddScoped<Domain.Interfaces.IStorageContext, Domain.StorageContext>();
+      services.AddScoped<Domain.RepositoryAbstractions.IDeliveryMethodRepository, Domain.Repositories.DeliveryMethodRepository>();
+
       services.AddSwaggerConfiguration();
       services
         .AddMvc()
