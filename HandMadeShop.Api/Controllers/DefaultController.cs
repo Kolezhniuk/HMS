@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using HandMadeShop.Domain.Entities;
+using HandMadeShop.Domain.RepositoryAbstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Net.Mime;
+using System.Threading.Tasks;
 
 namespace HandMadeShop.Api.Controllers
 {
@@ -9,6 +13,13 @@ namespace HandMadeShop.Api.Controllers
   [Route("api/v1/[controller]")]
   public class DefaultController : Controller
   {
+    [HttpGet("repo-test")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IEnumerable<DeliveryMethod>> GetListAsync([FromServices]IDeliveryMethodRepository deliveryMethodRepository)
+    {
+      return await deliveryMethodRepository.GetListAsync();
+    }
+
     /// <summary>
     /// Some docs for example.
     /// </summary>

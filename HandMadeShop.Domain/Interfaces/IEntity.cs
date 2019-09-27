@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace HandMadeShop.Domain.Interfaces
 {
   public interface IEntity
   {
+    ModelBuilder Configure(ModelBuilder builder);
   }
 }
