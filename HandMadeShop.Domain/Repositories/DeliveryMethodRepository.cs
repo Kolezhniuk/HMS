@@ -3,7 +3,9 @@ using HandMadeShop.Domain.Interfaces;
 using HandMadeShop.Domain.RepositoryAbstractions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using HandMadeShop.Domain.Entities.DeliveryMethod;
 
 namespace HandMadeShop.Domain.Repositories
 {
@@ -15,5 +17,10 @@ namespace HandMadeShop.Domain.Repositories
 
     public async Task<IEnumerable<DeliveryMethod>> GetListAsync() =>
       await this.dbSet.AsNoTracking().ToListAsync();
+
+    public IEnumerable<DeliveryMethod> GetList()
+    {
+      return dbSet.AsNoTracking().ToList();
+    }
   }
 }

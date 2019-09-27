@@ -18,7 +18,7 @@ namespace HandMadeShop.Domain.Entities
 
     public User User { get; set; }
     public OrderState OrderState { get; set; }
-    public DeliveryMethod DeliveryMethod { get; set; }
+    public DeliveryMethod.DeliveryMethod DeliveryMethod { get; set; }
     public PaymentMethod PaymentMethod { get; set; }
     public ICollection<OrderStateHistory> OrderStateHistories { get; set; }
 

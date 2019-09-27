@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using HandMadeShop.Domain.Entities.DeliveryMethod;
+using HandMadeShop.Domain.Utils;
 
 namespace HandMadeShop.Api.Controllers
 {
@@ -13,33 +15,20 @@ namespace HandMadeShop.Api.Controllers
   [Route("api/v1/[controller]")]
   public class DefaultController : Controller
   {
-    [HttpGet("repo-test")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IEnumerable<DeliveryMethod>> GetListAsync([FromServices]IDeliveryMethodRepository deliveryMethodRepository)
+    private readonly Messages _messages;
+
+    public DefaultController(Messages messages)
     {
-      return await deliveryMethodRepository.GetListAsync();
+      _messages = messages;
     }
 
-    /// <summary>
-    /// Some docs for example.
-    /// </summary>
-    [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public IActionResult Index()
+
+    [HttpGet("repo-test")]
+    public IActionResult GetAll()
     {
-      return this.Json(new {
-        Status = "Success",
-        StatusCode = 200,
-        Response = new
-        {
-          Data = "some data",
-          Headers = new string[]
-          {
-            "header 1",
-            "header 2"
-          }
-        }
-      });
+      var list = _messages.Dispatch(new GetListQuery());
+      return Ok(list);
     }
+
   }
 }

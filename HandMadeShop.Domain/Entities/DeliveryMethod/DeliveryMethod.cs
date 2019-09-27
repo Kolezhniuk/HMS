@@ -1,7 +1,7 @@
 ﻿using HandMadeShop.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace HandMadeShop.Domain.Entities
+namespace HandMadeShop.Domain.Entities.DeliveryMethod
 {
   public class DeliveryMethod : AuditableEntity
   {
@@ -18,7 +18,7 @@ namespace HandMadeShop.Domain.Entities
         b.Property(p => p.Name).IsRequired().HasMaxLength(64);
         b.Property(p => p.Position).IsRequired();
 
-        b.ToTable("DeliveryMethods");
+        b.ToTable(GetType().Name);
       });
   }
 }
