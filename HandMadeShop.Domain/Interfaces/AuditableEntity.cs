@@ -14,8 +14,6 @@ namespace HandMadeShop.Domain.Interfaces
     [Required]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public DateTime CreatedOn { get; set; } = DateTime.Now;
-    [Required]
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime ModifiedOn { get; set; } = DateTime.Now;
 
     public virtual ModelBuilder Configure(ModelBuilder builder) => builder;

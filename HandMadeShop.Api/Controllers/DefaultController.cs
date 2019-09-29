@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
+using CSharpFunctionalExtensions;
 using HandMadeShop.Domain.Entities.DeliveryMethod;
+using HandMadeShop.Domain.Entities.DeliveryMethod.Commands;
+using HandMadeShop.Domain.Entities.DeliveryMethod.Queries;
 using HandMadeShop.Domain.Utils;
 
 namespace HandMadeShop.Api.Controllers
@@ -8,7 +11,7 @@ namespace HandMadeShop.Api.Controllers
   [ApiController]
   [Produces(MediaTypeNames.Application.Json)]
   [Route("api/v1/[controller]")]
-  public class DefaultController : Controller
+  public class DefaultController : BaseController
   {
     private readonly Messages _messages;
 
@@ -23,6 +26,13 @@ namespace HandMadeShop.Api.Controllers
     {
       var list = _messages.Dispatch(new GetListQuery());
       return Ok(list);
+    }
+    [HttpPost]
+    public IActionResult CreateDeliveryMethod([FromBody]DeliveryMethodDto deliveryMethodDto)
+    {
+      var command = new CreateDeliveryMethodCommand(deliveryMethodDto.Name, deliveryMethodDto.Position);
+      var result = _messages.Dispatch(command);
+      return FromResult(result);
     }
 
   }

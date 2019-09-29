@@ -9,5 +9,6 @@ namespace HandMadeShop.Domain.RepositoryAbstractions
   {
     Task<IEnumerable<DeliveryMethod>> GetListAsync();
     IEnumerable<DeliveryMethod> GetList();
+    void Save(DeliveryMethod deliveryMethod);
   }
 }
