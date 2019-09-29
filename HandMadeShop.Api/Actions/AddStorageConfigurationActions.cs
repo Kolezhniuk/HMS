@@ -10,8 +10,8 @@ namespace HandMadeShop.Api.Actions
         {
             serviceCollection.Configure<Domain.Options.StorageContextOptions>
                 (o => o.ConnectionString = configuration.GetConnectionString("Default"));
-            serviceCollection.AddScoped<Domain.Interfaces.IStorageContext, Domain.StorageContext>();
-            serviceCollection.AddScoped<Domain.RepositoryAbstractions.IDeliveryMethodRepository, Domain.Repositories.DeliveryMethodRepository>();
+            serviceCollection.AddTransient<Domain.Interfaces.IStorageContext, Domain.StorageContext>();
+            serviceCollection.AddTransient<Domain.RepositoryAbstractions.IDeliveryMethodRepository, Domain.Repositories.DeliveryMethodRepository>();
         }
 
     }

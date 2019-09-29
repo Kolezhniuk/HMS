@@ -21,7 +21,6 @@ namespace HandMadeShop.Api
             services.AddStorage(configuration);
             services.AddHandlers();
             services.AddSingleton<Messages>();
-
             services.AddSwaggerConfiguration();
             services
                 .AddMvc()

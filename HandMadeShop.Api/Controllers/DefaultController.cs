@@ -1,10 +1,5 @@
-﻿using HandMadeShop.Domain.Entities;
-using HandMadeShop.Domain.RepositoryAbstractions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
-using System.Threading.Tasks;
 using HandMadeShop.Domain.Entities.DeliveryMethod;
 using HandMadeShop.Domain.Utils;
 

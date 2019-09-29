@@ -4,18 +4,17 @@ using System;
 
 namespace HandMadeShop.Domain
 {
-  public abstract class RepositoryBase<TEntity> where TEntity : class, IEntity
-  {
-    protected DbContext storageContext;
-    protected DbSet<TEntity> dbSet;
-
-    protected RepositoryBase(IStorageContext storageContext)
+    public abstract class RepositoryBase<TEntity> where TEntity : class, IEntity
     {
-      if (!(storageContext is DbContext))
-        throw new ArgumentException("The storageContext object must be an instance of the Microsoft.EntityFrameworkCore.DbContext class.");
+        protected DbContext storageContext;
+        protected DbSet<TEntity> dbSet;
 
-      this.storageContext = storageContext as DbContext;
-      this.dbSet = this.storageContext.Set<TEntity>();
+        protected RepositoryBase(IStorageContext storageContext)
+        {
+            this.storageContext = storageContext as DbContext ??
+                                  throw new ArgumentException(
+                                      "The storageContext object must be an instance of the Microsoft.EntityFrameworkCore.DbContext class.");
+            this.dbSet = this.storageContext.Set<TEntity>();
+        }
     }
-  }
 }

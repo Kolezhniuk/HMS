@@ -18,10 +18,6 @@ namespace HandMadeShop.Domain.Interfaces
     [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public DateTime ModifiedOn { get; set; } = DateTime.Now;
 
-    public virtual ModelBuilder Configure(ModelBuilder builder)
-    {
-      builder.Ignore<AuditableEntity>();
-      return builder;
-    }
+    public virtual ModelBuilder Configure(ModelBuilder builder) => builder;
   }
 }
