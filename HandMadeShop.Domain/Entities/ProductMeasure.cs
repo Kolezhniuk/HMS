@@ -18,8 +18,6 @@ namespace HandMadeShop.Domain.Entities
         b.HasIndex(p => new { p.ProductId, p.MeasureId }).IsUnique();
         b.HasOne(p => p.Product).WithMany(p => p.ProductMeasures).HasForeignKey(p => p.ProductId);
         b.HasOne(p => p.Measure).WithMany(p => p.ProductMeasures).HasForeignKey(p => p.MeasureId);
-
-        b.ToTable("ProductMeasures");
       });
   }
 }

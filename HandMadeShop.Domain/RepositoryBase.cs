@@ -7,17 +7,49 @@ using System.Xml.Linq;
 
 namespace HandMadeShop.Domain
 {
-    public abstract class RepositoryBase<TEntity> where TEntity : class, IEntity
+    public class RepositoryBase<T>: IGenericRepository<T> where T  : class, IEntity
     {
-        protected DbContext storageContext;
-        protected DbSet<TEntity> dbSet;
+        protected readonly DbContext StorageContext;
+        protected DbSet<T> _table;
 
-        protected RepositoryBase(IStorageContext storageContext)
+        public RepositoryBase(IStorageContext storageContext)
         {
-            this.storageContext = storageContext as DbContext ??
-                                  throw new ArgumentException(
-                                      "The storageContext object must be an instance of the Microsoft.EntityFrameworkCore.DbContext class.");
-            this.dbSet = this.storageContext.Set<TEntity>();
+            StorageContext = storageContext as DbContext ??
+                             throw new ArgumentException(
+                                 "The storageContext object must be an instance of the Microsoft.EntityFrameworkCore.DbContext class.");
+            _table = StorageContext.Set<T>();
         }
+
+        public IEnumerable<T> GetAll()
+        {
+            return _table.ToList();
+        }
+
+        public T GetById(int id)
+        {
+            return _table.Find(id);
+        }
+
+        public IGenericRepository<T> Insert(T entity)
+        {
+            _table.Add(entity);
+            return this;
+        }
+
+        public IGenericRepository<T> Update(T entity)
+        {
+            _table.Update(entity);
+            return this;
+        }
+
+        public IGenericRepository<T> Delete(int id)
+        {
+            T existing = _table.Find(id);
+            _table.Remove(existing);
+            return this;
+        }
+
+        public void Save() => StorageContext.SaveChanges();
+        
     }
 }

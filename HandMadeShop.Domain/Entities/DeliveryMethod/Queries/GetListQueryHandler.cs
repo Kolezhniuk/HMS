@@ -7,7 +7,7 @@ namespace HandMadeShop.Domain.Entities.DeliveryMethod.Queries
 {
     internal sealed class GetListQueryHandler : IQueryHandler<GetListQuery, IEnumerable<DeliveryMethodDto>>
     {
-        private IDeliveryMethodRepository _deliveryMethodRepository;
+        private readonly IDeliveryMethodRepository _deliveryMethodRepository;
 
         public GetListQueryHandler(IDeliveryMethodRepository deliveryMethodRepository)
         {
@@ -16,7 +16,7 @@ namespace HandMadeShop.Domain.Entities.DeliveryMethod.Queries
 
         public  IEnumerable<DeliveryMethodDto> Handle(GetListQuery query)
         {
-          var dBResponse = _deliveryMethodRepository.GetList();
+          var dBResponse = _deliveryMethodRepository.GetAll();
 
           return dBResponse.Select(i => new DeliveryMethodDto
           {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HandMadeShop.Domain.Entities
 {
-  public class Order : AuditableEntity
+  public class Order : AuditableEntity<Order>
   {
     public int Id { get; set; }
     public int UserId { get; set; }
@@ -23,7 +23,7 @@ namespace HandMadeShop.Domain.Entities
     public ICollection<OrderStateHistory> OrderStateHistories { get; set; }
 
     public override ModelBuilder Configure(ModelBuilder builder) =>
-      builder.Entity<Order>(b =>
+      base.Configure(builder).Entity<Order>(b =>
       {
         b.HasKey(p => p.Id);
         b.HasIndex(p => p.Id).IsUnique();
@@ -34,8 +34,6 @@ namespace HandMadeShop.Domain.Entities
         b.Property(p => p.DeliveryPrice).IsRequired();
         b.Property(p => p.PaymentMethodId).IsRequired();
         b.Property(p => p.Note).IsRequired().HasMaxLength(512);
-
-        b.ToTable("Orders");
       });
   }
 }

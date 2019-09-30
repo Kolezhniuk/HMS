@@ -19,7 +19,7 @@ namespace HandMadeShop.Domain.Entities
         b.HasOne(p => p.Product).WithMany(p => p.ProductCategories).HasForeignKey(p => p.ProductId);
         b.HasOne(p => p.Category).WithMany(p => p.ProductCategories).HasForeignKey(p => p.CategoryId);
 
-        b.ToTable("ProductCategories");
+        b.ToTable(GetType().Name);
       });
   }
 }

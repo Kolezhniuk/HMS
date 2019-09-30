@@ -5,10 +5,7 @@ using HandMadeShop.Domain.Entities.DeliveryMethod;
 
 namespace HandMadeShop.Domain.RepositoryAbstractions
 {
-  public interface IDeliveryMethodRepository
+  public interface IDeliveryMethodRepository: IGenericRepository<DeliveryMethod>
   {
-    Task<IEnumerable<DeliveryMethod>> GetListAsync();
-    IEnumerable<DeliveryMethod> GetList();
-    void Save(DeliveryMethod deliveryMethod);
   }
 }

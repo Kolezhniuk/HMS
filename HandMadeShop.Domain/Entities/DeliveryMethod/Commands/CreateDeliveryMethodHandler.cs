@@ -7,7 +7,7 @@ namespace HandMadeShop.Domain.Entities.DeliveryMethod.Commands
 {
     public class CreateDeliveryMethodHandler: ICommandHandler<CreateDeliveryMethodCommand>
     {
-        private IDeliveryMethodRepository _repository;
+        private readonly IDeliveryMethodRepository _repository;
 
         public CreateDeliveryMethodHandler(IDeliveryMethodRepository repository)
         {
@@ -21,12 +21,9 @@ namespace HandMadeShop.Domain.Entities.DeliveryMethod.Commands
                 Name = command.Name,
                 Position = command.Position,
                 CreatedBy = 1,
-                CreatedOn = DateTime.Now,
                 ModifiedBy = 1,
-                ModifiedOn = DateTime.Now
-
             };
-            _repository.Save(deliveryMethod);
+            _repository.Insert(deliveryMethod).Save();
             return Result.Ok();
         }
     }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HandMadeShop.Domain.Entities
 {
-  public class OrderItem : AuditableEntity
+  public class OrderItem : AuditableEntity<OrderItem>
   {
     public int Id { get; set; }
     public int OrderId { get; set; }
@@ -15,7 +15,7 @@ namespace HandMadeShop.Domain.Entities
     public Product Product { get; set; }
 
     public override ModelBuilder Configure(ModelBuilder builder) =>
-      builder.Entity<OrderItem>(b =>
+      base.Configure(builder).Entity<OrderItem>(b =>
       {
         b.HasKey(p => p.Id);
         b.HasIndex(p => p.Id).IsUnique();
@@ -24,8 +24,6 @@ namespace HandMadeShop.Domain.Entities
         b.Property(p => p.ProductId).IsRequired();
         b.Property(p => p.Quantity).IsRequired();
         b.Property(p => p.Discount).IsRequired();
-
-        b.ToTable("OrderItems");
       });
   }
 }
