@@ -9,16 +9,17 @@ namespace HandMadeShop.Api
 {
     public class Startup
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
         public Startup(IConfiguration configuration)
         {
-            this.configuration = configuration;
+            _configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddStorage(configuration);
+            services.AddStorage(_configuration);
+            services.AddMongoSettings(_configuration);
             services.AddHandlers();
             services.AddSingleton<Messages>();
             services.AddSwaggerConfiguration();
