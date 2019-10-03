@@ -1,11 +1,11 @@
 ﻿using HandMadeShop.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using HandMadeShop.Domain.Entities.DeliveryMethod;
 
 namespace HandMadeShop.Domain.RepositoryAbstractions
 {
-  public interface IDeliveryMethodRepository
+  public interface IDeliveryMethodRepository: IGenericRepository<DeliveryMethod>
   {
-    Task<IEnumerable<DeliveryMethod>> GetListAsync();
   }
 }

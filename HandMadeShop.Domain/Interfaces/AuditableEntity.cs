@@ -5,19 +5,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HandMadeShop.Domain.Interfaces
 {
-  public abstract class AuditableEntity : IEntity
+  public abstract class AuditableEntity<T> : IEntity where T : AuditableEntity<T>
   {
-    [Required]
     public int CreatedBy { get; set; }
-    [Required]
     public int ModifiedBy { get; set; }
-    [Required]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public DateTime CreatedOn { get; set; } = DateTime.Now;
-    [Required]
-    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-    public DateTime ModifiedOn { get; set; } = DateTime.Now;
+    public DateTime CreatedOn { get; set; } 
+    public DateTime ModifiedOn { get; set; }
 
-    public abstract ModelBuilder Configure(ModelBuilder builder);
+    public virtual ModelBuilder Configure(ModelBuilder builder) =>
+    
+      builder.Entity<T>(b =>
+      {
+        b.Property(p => p.CreatedBy).IsRequired();
+        b.Property(p => p.ModifiedBy).IsRequired();
+        b.Property(p => p.ModifiedOn).IsRequired().ValueGeneratedOnUpdate().HasDefaultValue(DateTime.Now);
+        b.Property(p => p.CreatedOn).IsRequired().ValueGeneratedOnAdd().HasDefaultValue(DateTime.Now);
+        b.ToTable(typeof(T).Name);
+      });
+    
   }
 }

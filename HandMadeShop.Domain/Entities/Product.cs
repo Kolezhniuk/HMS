@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace HandMadeShop.Domain.Entities
 {
-  public class Product : AuditableEntity
+  public class Product : AuditableEntity<Product>
   {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -19,7 +19,7 @@ namespace HandMadeShop.Domain.Entities
     public ICollection<ProductMeasure> ProductMeasures { get; set; }
 
     public override ModelBuilder Configure(ModelBuilder builder) =>
-      builder.Entity<Product>(b =>
+      base.Configure(builder).Entity<Product>(b =>
       {
         b.HasKey(p => p.Id);
         b.HasIndex(p => p.Id).IsUnique();
@@ -29,9 +29,6 @@ namespace HandMadeShop.Domain.Entities
         b.Property(p => p.PhotoUrl).IsRequired().HasMaxLength(64);
         b.Property(p => p.IsHidden).IsRequired();
         b.Property(p => p.IsAvailable).IsRequired();
-        //b.Property(p => p.Created).IsRequired().HasDefaultValueSql("GetUtcDate()");
-
-        b.ToTable("Products");
       });
   }
 }
