@@ -30,9 +30,9 @@ namespace HandMadeShop.Api.Utils
         private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
             // Log exception here
-            string result = JsonConvert.SerializeObject(ResponceWrapper.Error(exception.Message));
+            var result = JsonConvert.SerializeObject(ResponseWrapper.Error(exception.Message));
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
             return context.Response.WriteAsync(result);
         }
     }
