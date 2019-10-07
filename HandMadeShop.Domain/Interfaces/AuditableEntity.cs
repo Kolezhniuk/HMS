@@ -1,11 +1,10 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace HandMadeShop.Domain.Interfaces
 {
-  public abstract class AuditableEntity<T> : IEntity where T : AuditableEntity<T>
+  public abstract class AuditableEntity<T> : IEntity 
+    where T : AuditableEntity<T>
   {
     public int CreatedBy { get; set; }
     public int ModifiedBy { get; set; }

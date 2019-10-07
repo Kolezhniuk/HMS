@@ -23,8 +23,7 @@ namespace HandMadeShop.Api
       services.AddHandlers();
       services.AddSingleton<Messages>();
       services.AddSwaggerConfiguration();
-      services
-        .AddControllers()
+      services.AddControllers()
         .AddNewtonsoftJson(a => a.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
     }
 

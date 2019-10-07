@@ -1,9 +1,7 @@
 ﻿using System;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.IO;
 using Serilog;
 using Serilog.Events;
@@ -11,7 +9,7 @@ using Serilog.Sinks.Elasticsearch;
 
 namespace HandMadeShop.Api
 {
-    public static class Program
+  public static class Program
     {
         public static void Main(string[] args)
         {

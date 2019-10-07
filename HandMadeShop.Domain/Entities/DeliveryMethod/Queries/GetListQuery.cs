@@ -3,8 +3,8 @@ using HandMadeShop.Domain.Interfaces;
 
 namespace HandMadeShop.Domain.Entities.DeliveryMethod.Queries
 {
-    public class GetListQuery: IQuery<IEnumerable<DeliveryMethodDto>>
-    {
+  public class GetListQuery : IQuery<IEnumerable<DeliveryMethodDto>>
+  {
 
-    }
+  }
 }

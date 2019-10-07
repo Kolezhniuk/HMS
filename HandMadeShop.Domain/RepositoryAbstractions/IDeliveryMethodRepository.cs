@@ -1,7 +1,4 @@
-﻿using HandMadeShop.Domain.Entities;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using HandMadeShop.Domain.Entities.DeliveryMethod;
+﻿using HandMadeShop.Domain.Entities.DeliveryMethod;
 
 namespace HandMadeShop.Domain.RepositoryAbstractions
 {
