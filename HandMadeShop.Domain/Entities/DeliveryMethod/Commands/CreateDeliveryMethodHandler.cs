@@ -1,11 +1,10 @@
-using System;
-using CSharpFunctionalExtensions;
 using HandMadeShop.Domain.Interfaces;
 using HandMadeShop.Domain.RepositoryAbstractions;
+using HandMadeShop.Domain.Utils;
 
 namespace HandMadeShop.Domain.Entities.DeliveryMethod.Commands
 {
-    public class CreateDeliveryMethodHandler: ICommandHandler<CreateDeliveryMethodCommand>
+    public class CreateDeliveryMethodHandler : ICommandHandler<CreateDeliveryMethodCommand>
     {
         private readonly IDeliveryMethodRepository _repository;
 
@@ -14,7 +13,7 @@ namespace HandMadeShop.Domain.Entities.DeliveryMethod.Commands
             _repository = repository;
         }
 
-        public Result Handle(CreateDeliveryMethodCommand command)
+        public CommandResult Handle(CreateDeliveryMethodCommand command)
         {
             var deliveryMethod = new DeliveryMethod
             {
@@ -24,7 +23,7 @@ namespace HandMadeShop.Domain.Entities.DeliveryMethod.Commands
                 ModifiedBy = 1,
             };
             _repository.Insert(deliveryMethod).Save();
-            return Result.Ok();
+            return CommandResult.Ok();
         }
     }
 }
