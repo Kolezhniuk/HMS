@@ -1,10 +1,10 @@
-using CSharpFunctionalExtensions;
+using HandMadeShop.Domain.Utils;
 
 namespace HandMadeShop.Domain.Interfaces
 {
     public interface ICommandHandler<TCommand>
         where TCommand : ICommand
     {
-        Result Handle(TCommand command);
+        CommandResult Handle(TCommand command);
     }
 }

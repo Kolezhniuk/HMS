@@ -3,11 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace HandMadeShop.Domain
 {
-    public class RepositoryBase<T>: IGenericRepository<T> where T  : class, IEntity
+  public class RepositoryBase<T>: IGenericRepository<T> where T  : class, IEntity
     {
         protected readonly DbContext StorageContext;
         protected DbSet<T> _table;
