@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using System;
+using System.IO;
 
 namespace HandMadeShop.Api
 {
@@ -12,17 +13,21 @@ namespace HandMadeShop.Api
       CreateWebHostBuilder(args).Build().Run();
     }
 
-    public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-      WebHost.CreateDefaultBuilder(args)
-        .ConfigureAppConfiguration((hostingContext, configurationBuilder) =>
+    public static IHostBuilder CreateWebHostBuilder(string[] args) =>
+      Host.CreateDefaultBuilder(args)
+        .ConfigureAppConfiguration((builder, context) =>
         {
-          var alias = Environment.UserName.Replace(" ", string.Empty);
+          string alias = Environment.UserName.Replace(" ", string.Empty);
 
-          configurationBuilder
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-            .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+          context.SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("hostsettings.json", optional: true)
+            .AddJsonFile($"appsettings.{builder.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"appsettings.{alias}.json", optional: true, reloadOnChange: true);
+
         })
-        .UseStartup<Startup>();
+        .ConfigureWebHostDefaults(builder =>
+        {
+          builder.UseStartup<Startup>();
+        });
   }
 }
