@@ -15,14 +15,16 @@ namespace HandMadeShop.Domain.Entities.DeliveryMethod.Commands
 
         public CommandResult Handle(CreateDeliveryMethodCommand command)
         {
-            var deliveryMethod = new DeliveryMethod
-            {
-                Name = command.Name,
-                Position = command.Position,
-                CreatedBy = 1,
-                ModifiedBy = 1,
-            };
-            _repository.Insert(deliveryMethod).Save();
+            _repository
+              .Insert(new DeliveryMethod
+              {
+                  Name = command.Name,
+                  Position = command.Position,
+                  CreatedBy = 1,
+                  ModifiedBy = 1,
+              })
+              .Save();
+
             return CommandResult.Ok();
         }
     }

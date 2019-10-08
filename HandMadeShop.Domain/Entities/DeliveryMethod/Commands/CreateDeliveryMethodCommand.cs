@@ -3,15 +3,15 @@ using HandMadeShop.Domain.Interfaces;
 
 namespace HandMadeShop.Domain.Entities.DeliveryMethod.Commands
 {
-    public  sealed class CreateDeliveryMethodCommand: ICommand
+  public sealed class CreateDeliveryMethodCommand : ICommand
+  {
+    public string Name { get; }
+    public int Position { get; }
+
+    public CreateDeliveryMethodCommand(string name, int position)
     {
-        public string Name { get; }
-        public int Position { get; }
-        
-        public CreateDeliveryMethodCommand(string name, int position)
-        {
-            Name = name;
-            Position = position;
-        }
+      Name = name;
+      Position = position;
     }
+  }
 }

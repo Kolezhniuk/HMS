@@ -6,34 +6,34 @@ using Newtonsoft.Json;
 
 namespace HandMadeShop.Api.Utils
 {
-    public sealed class ExceptionHandler
+  public sealed class ExceptionHandler
+  {
+    private readonly RequestDelegate _next;
+
+    public ExceptionHandler(RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
-
-        public ExceptionHandler(RequestDelegate next)
-        {
-            _next = next;
-        }
-
-        public async Task Invoke(HttpContext context)
-        {
-            try
-            {
-                await _next(context);
-            }
-            catch (Exception ex)
-            {
-                await HandleExceptionAsync(context, ex);
-            }
-        }
-
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
-        {
-            // Log exception here
-            var result = JsonConvert.SerializeObject(ResponseWrapper.Error(exception.Message));
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
-            return context.Response.WriteAsync(result);
-        }
+      _next = next;
     }
+
+    public async Task Invoke(HttpContext context)
+    {
+      try
+      {
+        await _next(context);
+      }
+      catch (Exception ex)
+      {
+        await HandleExceptionAsync(context, ex);
+      }
+    }
+
+    private Task HandleExceptionAsync(HttpContext context, Exception exception)
+    {
+      // Log exception here
+      string result = JsonConvert.SerializeObject(ResponseWrapper.Error(exception.Message));
+      context.Response.ContentType = "application/json";
+      context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+      return context.Response.WriteAsync(result);
+    }
+  }
 }

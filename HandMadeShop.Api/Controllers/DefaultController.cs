@@ -24,6 +24,7 @@ namespace HandMadeShop.Api.Controllers
         public IActionResult GetAll()
         {
             var list = _messages.Dispatch(new GetListQuery());
+
             return Ok(list);
         }
 
@@ -32,6 +33,7 @@ namespace HandMadeShop.Api.Controllers
         {
             var command = new CreateDeliveryMethodCommand(deliveryMethodDto.Name, deliveryMethodDto.Position);
             var result = _messages.Dispatch(command);
+            
             return FromResult(result);
         }
     }

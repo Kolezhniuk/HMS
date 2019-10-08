@@ -4,10 +4,10 @@ using HandMadeShop.Domain.RepositoryAbstractions;
 
 namespace HandMadeShop.Domain.Repositories
 {
-    public class DeliveryMethodRepository: RepositoryBase<DeliveryMethod>, IDeliveryMethodRepository
+  public class DeliveryMethodRepository : RepositoryBase<DeliveryMethod>, IDeliveryMethodRepository
+  {
+    public DeliveryMethodRepository(IStorageContext storageContext) : base(storageContext)
     {
-        public DeliveryMethodRepository(IStorageContext storageContext) : base(storageContext)
-        {
-        }
     }
+  }
 }

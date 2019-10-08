@@ -6,8 +6,8 @@ namespace HandMadeShop.Api.Actions
   {
     public static void UseSwaggerConfiguration(this IApplicationBuilder applicationBuilder)
     {
-        applicationBuilder.UseOpenApi();
-        applicationBuilder.UseSwaggerUi3();
+      applicationBuilder.UseOpenApi();
+      applicationBuilder.UseSwaggerUi3();
     }
   }
 }
