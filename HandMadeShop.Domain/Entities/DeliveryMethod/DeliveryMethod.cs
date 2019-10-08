@@ -21,6 +21,5 @@ namespace HandMadeShop.Domain.Entities.DeliveryMethod
         b.Property(p => p.ModifiedOn).IsRequired().ValueGeneratedOnUpdate().HasDefaultValue(DateTime.Now);
         b.Property(p => p.CreatedOn).IsRequired().ValueGeneratedOnAdd().HasDefaultValue(DateTime.Now);
       });
-
   }
 }

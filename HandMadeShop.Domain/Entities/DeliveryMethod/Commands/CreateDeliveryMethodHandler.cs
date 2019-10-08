@@ -4,28 +4,28 @@ using HandMadeShop.Domain.Utils;
 
 namespace HandMadeShop.Domain.Entities.DeliveryMethod.Commands
 {
-  public class CreateDeliveryMethodHandler : ICommandHandler<CreateDeliveryMethodCommand>
-  {
-    private readonly IDeliveryMethodRepository _repository;
-
-    public CreateDeliveryMethodHandler(IDeliveryMethodRepository repository)
+    public class CreateDeliveryMethodHandler : ICommandHandler<CreateDeliveryMethodCommand>
     {
-      _repository = repository;
-    }
+        private readonly IDeliveryMethodRepository _repository;
 
-    public CommandResult Handle(CreateDeliveryMethodCommand command)
-    {
-      _repository
-        .Insert(new DeliveryMethod
+        public CreateDeliveryMethodHandler(IDeliveryMethodRepository repository)
         {
-          Name = command.Name,
-          Position = command.Position,
-          CreatedBy = 1,
-          ModifiedBy = 1,
-        })
-        .Save();
+            _repository = repository;
+        }
 
-      return CommandResult.Ok();
+        public CommandResult Handle(CreateDeliveryMethodCommand command)
+        {
+            _repository
+              .Insert(new DeliveryMethod
+              {
+                  Name = command.Name,
+                  Position = command.Position,
+                  CreatedBy = 1,
+                  ModifiedBy = 1,
+              })
+              .Save();
+
+            return CommandResult.Ok();
+        }
     }
-  }
 }

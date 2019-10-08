@@ -23,7 +23,7 @@ namespace HandMadeShop.Api
           string alias = Environment.UserName.Replace(" ", string.Empty);
 
           context.SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("hostsettings.json", optional: true)
+            .AddJsonFile("appsettings.json", optional: true)
             .AddJsonFile($"appsettings.{builder.HostingEnvironment.EnvironmentName}.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"appsettings.{alias}.json", optional: true, reloadOnChange: true);
         })
