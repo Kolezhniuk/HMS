@@ -1,8 +1,8 @@
 ﻿using System.Net.Mime;
-using HandMadeShop.Domain.Entities.DeliveryMethod;
-using HandMadeShop.Domain.Entities.DeliveryMethod.Commands;
-using HandMadeShop.Domain.Entities.DeliveryMethod.Queries;
-using HandMadeShop.Domain.Utils;
+using HandMadeShop.Dtos.DeliveryMethod;
+using HandMadeShop.Logic.Domain.DeliveryMethod.Commands;
+using HandMadeShop.Logic.Domain.DeliveryMethod.Queries;
+using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HandMadeShop.Api.Controllers
@@ -33,7 +33,7 @@ namespace HandMadeShop.Api.Controllers
         {
             var command = new CreateDeliveryMethodCommand(deliveryMethodDto.Name, deliveryMethodDto.Position);
             var result = _messages.Dispatch(command);
-            
+
             return FromResult(result);
         }
     }

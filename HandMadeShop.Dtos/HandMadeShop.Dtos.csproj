@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <_UnmanagedRegistrationCache Remove="obj\HandMadeShop.Dtos.csproj.UnmanagedRegistration.cache"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <_ResolveComReferenceCache Remove="obj\Debug\netstandard2.1\HandMadeShop.Dtos.csproj.ResolveComReference.cache"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <IntermediateAssembly Remove="obj\Debug\netstandard2.1\HandMadeShop.Dtos.dll"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <_DebugSymbolsIntermediatePath Remove="obj\Debug\netstandard2.1\HandMadeShop.Dtos.pdb"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <_DeploymentManifestEntryPoint Remove="obj\Debug\netstandard2.1\HandMadeShop.Dtos.dll"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ApplicationManifest Remove="obj\Debug\netstandard2.1\Native.HandMadeShop.Dtos.manifest"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <DeployManifest Remove="obj\Debug\netstandard2.1\HandMadeShop.Dtos.application"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ClsidMap Remove="obj\Debug\netstandard2.1\HandMadeShop.Dtos.clsidmap"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <RegFreeComManifest Remove="obj\Debug\netstandard2.1\HandMadeShop.Dtos.X.manifest"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Product"/>
+    </ItemGroup>
+
+</Project>

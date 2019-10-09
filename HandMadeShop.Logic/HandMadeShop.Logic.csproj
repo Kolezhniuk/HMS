@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Folder Include="Domain\DeliveryMethod"/>
+        <Folder Include="Interfaces"/>
+        <Folder Include="Utils"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\HandMadeShop.Dtos\HandMadeShop.Dtos.csproj"/>
+    </ItemGroup>
+
+</Project>
