@@ -1,10 +1,8 @@
-﻿namespace HandMadeShop.Core.Entities
+﻿namespace HandMadeShop.Core.Models
 {
     public class OrderItem
     {
         public int Id { get; set; }
-        public int OrderId { get; set; }
-        public int ProductId { get; set; }
         public double Quantity { get; set; }
         public double Discount { get; set; }
 

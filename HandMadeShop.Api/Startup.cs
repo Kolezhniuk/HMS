@@ -19,7 +19,7 @@ namespace HandMadeShop.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddStorage(_configuration);
+//            services.AddStorage(_configuration);
             services.AddHandlers();
             services.AddSingleton<Messages>();
             services.AddSwaggerConfiguration();

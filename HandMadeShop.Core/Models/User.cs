@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace HandMadeShop.Core.Entities
+﻿namespace HandMadeShop.Core.Models
 {
     public class User
     {
@@ -10,7 +8,5 @@ namespace HandMadeShop.Core.Entities
         public string Email { get; set; }
         public string Phone { get; set; }
         public bool? Gender { get; set; }
-
-        public ICollection<OrderStateHistory> OrderStateHistories { get; set; }
     }
 }

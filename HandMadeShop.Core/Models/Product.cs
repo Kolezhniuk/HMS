@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HandMadeShop.Core.Entities
+namespace HandMadeShop.Core.Models
 {
     public class Product
     {
@@ -11,8 +11,8 @@ namespace HandMadeShop.Core.Entities
         public bool IsHidden { get; set; }
         public bool IsAvailable { get; set; }
 
-        public ICollection<ProductCategory> ProductCategories { get; set; }
-        public ICollection<ProductDetail> ProductDetails { get; set; }
-        public ICollection<ProductMeasure> ProductMeasures { get; set; }
+        public ICollection<Category> ProductCategories { get; set; }
+        public ICollection<Detail> ProductDetails { get; set; }
+        public ICollection<Measure> ProductMeasures { get; set; }
     }
 }
