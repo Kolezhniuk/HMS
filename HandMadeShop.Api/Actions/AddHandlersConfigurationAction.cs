@@ -10,7 +10,7 @@ namespace HandMadeShop.Api.Actions
         public static void AddHandlers(this IServiceCollection services)
         {
             var handlerTypes = typeof(ICommand).Assembly.GetTypes()
-                .Where(x => x.GetInterfaces().Any(y => IsHandlerInterface(y)))
+                .Where(x => x.GetInterfaces().Any(IsHandlerInterface))
                 .Where(x => x.Name.EndsWith("Handler"))
                 .ToList();
 
@@ -22,7 +22,7 @@ namespace HandMadeShop.Api.Actions
 
         private static void AddHandler(IServiceCollection services, Type type)
         {
-            var interfaceType = type.GetInterfaces().Single(y => IsHandlerInterface(y));
+            var interfaceType = type.GetInterfaces().Single(IsHandlerInterface);
             services.AddTransient(interfaceType, type);
         }
 

@@ -12,10 +12,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\HandMadeShop.Dtos\HandMadeShop.Dtos.csproj"/>
+        <ProjectReference Include="..\HandMadeShop.Persistence\HandMadeShop.Persistence.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.CSharp" Version="4.6.0"/>
+        <PackageReference Include="RavenDB.Client" Version="4.1.4"/>
     </ItemGroup>
 
 </Project>

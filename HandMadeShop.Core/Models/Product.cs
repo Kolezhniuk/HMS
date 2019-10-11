@@ -10,7 +10,6 @@ namespace HandMadeShop.Core.Models
         public string PhotoUrl { get; set; }
         public bool IsHidden { get; set; }
         public bool IsAvailable { get; set; }
-
         public ICollection<Category> ProductCategories { get; set; }
         public ICollection<Detail> ProductDetails { get; set; }
         public ICollection<Measure> ProductMeasures { get; set; }

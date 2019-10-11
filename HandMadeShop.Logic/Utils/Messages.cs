@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using HandMadeShop.Logic.Interfaces;
 
 namespace HandMadeShop.Logic.Utils
@@ -12,26 +13,26 @@ namespace HandMadeShop.Logic.Utils
             _provider = provider;
         }
 
-        public CommandResult Dispatch(ICommand command)
+        public async Task<CommandResult> DispatchCommand(ICommand command)
         {
             var type = typeof(ICommandHandler<>);
             Type[] typeArgs = {command.GetType()};
             var handlerType = type.MakeGenericType(typeArgs);
 
             dynamic handler = _provider.GetService(handlerType);
-            CommandResult commandResult = handler.Handle((dynamic) command);
+            CommandResult commandResult = await handler.Handle((dynamic) command);
 
             return commandResult;
         }
 
-        public T Dispatch<T>(IQuery<T> query)
+        public async Task<T> DispatchQuery<T>(IQuery<T> query)
         {
             var type = typeof(IQueryHandler<,>);
             Type[] typeArgs = {query.GetType(), typeof(T)};
             var handlerType = type.MakeGenericType(typeArgs);
 
             dynamic handler = _provider.GetService(handlerType);
-            T result = handler.Handle((dynamic) query);
+            T result = await handler.Handle((dynamic) query);
 
             return result;
         }

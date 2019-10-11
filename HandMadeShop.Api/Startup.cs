@@ -19,9 +19,9 @@ namespace HandMadeShop.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-//            services.AddStorage(_configuration);
-            services.AddHandlers();
+            services.AddStorage();
             services.AddSingleton<Messages>();
+            services.AddHandlers();
             services.AddSwaggerConfiguration();
             services.AddControllers()
                 .AddNewtonsoftJson(a => a.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
