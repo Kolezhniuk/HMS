@@ -23,6 +23,8 @@ namespace HandMadeShop.Api.Controllers
 
         protected IActionResult FromResult(CommandResult commandResult)
         {
+            if (commandResult.IsSuccess && commandResult.Payload != null)
+                return Ok(commandResult.Payload);
             return commandResult.IsSuccess ? Ok() : Error(commandResult.Error);
         }
     }

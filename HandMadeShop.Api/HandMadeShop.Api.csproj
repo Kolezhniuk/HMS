@@ -18,7 +18,10 @@
     <ItemGroup>
         <ProjectReference Include="..\HandMadeShop.Core\HandMadeShop.Core.csproj"/>
         <ProjectReference Include="..\HandMadeShop.Logic\HandMadeShop.Logic.csproj"/>
-        <ProjectReference Include="..\HandMadeShop.Persistence\HandMadeShop.Persistence.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Middleware"/>
     </ItemGroup>
 
 

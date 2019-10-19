@@ -19,7 +19,7 @@ namespace HandMadeShop.Logic.Domain.Product.Queries
 
         public async Task<IEnumerable<ProductListDto>> Handle(GetProductListQuery query)
         {
-            return (await _dbSession.Query<Persistence.Product>().ToListAsync()).Select(product => new ProductListDto()
+            return (await _dbSession.Query<Core.Models.Product>().ToListAsync()).Select(product => new ProductListDto()
             {
                 Name = product.Name,
                 Id = product.Id,

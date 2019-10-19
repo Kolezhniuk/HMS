@@ -2,7 +2,7 @@
 {
     public class OrderItem
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public double Quantity { get; set; }
         public double Discount { get; set; }
 

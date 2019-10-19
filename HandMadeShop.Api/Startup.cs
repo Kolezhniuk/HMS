@@ -36,7 +36,6 @@ namespace HandMadeShop.Api
 
             app.UseSwaggerConfiguration();
             app.UseRouting();
-            //app.UseCors();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

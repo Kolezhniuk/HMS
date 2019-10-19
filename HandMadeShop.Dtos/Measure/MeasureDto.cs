@@ -1,6 +1,6 @@
-﻿namespace HandMadeShop.Core.Models
+namespace HandMadeShop.Dtos.Measure
 {
-    public class PaymentMethod
+    public class MeasureDto
     {
         public string Id { get; set; }
         public string Name { get; set; }
