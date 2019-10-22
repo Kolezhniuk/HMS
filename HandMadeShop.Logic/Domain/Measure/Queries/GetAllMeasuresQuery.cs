@@ -4,7 +4,7 @@ using HandMadeShop.Logic.Interfaces;
 
 namespace HandMadeShop.Logic.Domain.Measure.Queries
 {
-    public class GetMeasureListQuery : IQuery<IEnumerable<MeasureDto>>
+    public class GetAllMeasuresQuery : IQuery<IEnumerable<MeasureDto>>
     {
     }
 }

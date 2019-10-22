@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Mime;
 using System.Threading.Tasks;
 using HandMadeShop.Dtos.Measure;
@@ -24,16 +25,16 @@ namespace HandMadeShop.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(MeasureDto dto)
+        public async Task<IActionResult> GetAll()
         {
-            var result = await _messages.DispatchQuery(new GetMeasureListQuery());
+            var result = await _messages.DispatchQuery(new GetAllMeasuresQuery());
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            var result = await _messages.DispatchQuery(new GetMeasureQuery() {Id = id});
+            var result = await _messages.DispatchQuery(new GetMeasureQuery() {Id = Uri.UnescapeDataString(id)});
             return Ok(result);
         }
 
@@ -43,7 +44,7 @@ namespace HandMadeShop.Api.Controllers
         {
             var command = new AddMeasureCommand(dto.Name, dto.Position);
             var result = await _messages.DispatchCommand(command);
-            return FromResult(result);
+            return FromResult(result, HttpStatusCode.Created);
         }
 
         [HttpPost("bulk")]
@@ -52,7 +53,7 @@ namespace HandMadeShop.Api.Controllers
         {
             var command = new BulkInsertMeasureCommand(dtos);
             var result = await _messages.DispatchCommand(command);
-            return FromResult(result);
+            return FromResult(result, HttpStatusCode.Created);
         }
 
         [HttpPut("update/{id}")]

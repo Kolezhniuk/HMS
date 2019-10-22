@@ -1,3 +1,4 @@
+using System.Net;
 using HandMadeShop.Api.Utils;
 using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,11 @@ namespace HandMadeShop.Api.Controllers
             return BadRequest(ResponseWrapper.Error(errorMessage));
         }
 
-        protected IActionResult FromResult(CommandResult commandResult)
+        protected IActionResult FromResult(CommandResult commandResult, HttpStatusCode statusCode = HttpStatusCode.OK)
         {
             if (commandResult.IsSuccess && commandResult.Payload != null)
-                return Ok(commandResult.Payload);
-            return commandResult.IsSuccess ? Ok() : Error(commandResult.Error);
+                return StatusCode((int) statusCode, commandResult.Payload);
+            return commandResult.IsSuccess ? StatusCode((int) statusCode) : Error(commandResult.Error);
         }
     }
 }
