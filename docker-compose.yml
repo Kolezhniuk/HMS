@@ -1,28 +1,28 @@
 version: '3.7'
 
 services:
-  #  elasticsearch:
-  #    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
-  #    environment:
-  #      - cluster.name=docker-cluster
-  #      - bootstrap.memory_lock=true
-  #      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-  #    ulimits:
-  #      memlock:
-  #        soft: -1
-  #        hard: -1
-  #    ports:
-  #      - "9200:9200"
-  #    networks:
-  #      logmetric:
-  #
-  #  kibana:
-  #    image: docker.elastic.co/kibana/kibana:6.3.2
-  #    ports:
-  #      - "5601:5601"
-  #    networks:
-  #      logmetric:
-  #        
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9200:9200"
+    networks:
+      logmetric:
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.3.2
+    ports:
+      - "5601:5601"
+    networks:
+      logmetric:
+
   ravendb:
     image: ravendb/ravendb
     ports:
@@ -40,12 +40,3 @@ networks:
   logmetric:
     driver: 'bridge'
     
-
-#  mongo-cqrs:
-#    image: "mongo:latest"
-#    ports:
-#      - "27017:27017"
-#    volumes:
-#      - db:/data/db
-#  
-#
