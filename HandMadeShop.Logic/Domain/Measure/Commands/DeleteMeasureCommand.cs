@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
 using HandMadeShop.Logic.Interfaces;
+using HandMadeShop.Logic.Utils;
+using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Measure.Commands
 {
@@ -10,5 +13,22 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
         }
 
         public string Id { get; }
+
+        internal sealed class DeleteMeasureCommandHandler : ICommandHandler<DeleteMeasureCommand>
+        {
+            private readonly IAsyncDocumentSession _session;
+
+            public DeleteMeasureCommandHandler(IAsyncDocumentSession session)
+            {
+                _session = session;
+            }
+
+            public async Task<CommandResult> Handle(DeleteMeasureCommand command)
+            {
+                _session.Delete(command.Id);
+                await _session.SaveChangesAsync();
+                return CommandResult.Ok();
+            }
+        }
     }
 }
