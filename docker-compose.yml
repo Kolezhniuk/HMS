@@ -13,6 +13,8 @@ services:
         hard: -1
     ports:
       - "9200:9200"
+    volumes:
+      - '.\logs:/usr/share/elasticsearch/data'
     networks:
       logmetric:
 
@@ -28,7 +30,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - 'C:\Users\dmytro.kolezhniuk\Desktop\shop\HandMadeShop\db:/opt/RavenDB/Server/RavenData'
+      - '.\db:/opt/RavenDB/Server/RavenData'
     networks:
       ravendb-net:
 
