@@ -13,4 +13,4 @@ Hand Made Shop
     - go to Kibana is up -  http://localhost:5601 
     - stop all infrastructure components `docker-compose stop`
     - remove all infrastructure  containers components `docker-compose rm -f`
-    
+        

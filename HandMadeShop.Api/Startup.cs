@@ -1,5 +1,5 @@
 ﻿using HandMadeShop.Api.Actions;
-using HandMadeShop.Domain.Utils;
+using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -8,38 +8,35 @@ using Microsoft.Extensions.Hosting;
 
 namespace HandMadeShop.Api
 {
-  public class Startup
-  {
-    private readonly IConfiguration _configuration;
-
-    public Startup(IConfiguration configuration)
+    public class Startup
     {
-      _configuration = configuration;
-    }
+        private readonly IConfiguration _configuration;
 
-    public void ConfigureServices(IServiceCollection services)
-    {
-      services.AddStorage(_configuration);
-      services.AddHandlers();
-      services.AddSingleton<Messages>();
-      services.AddSwaggerConfiguration();
-      services.AddControllers()
-        .AddNewtonsoftJson(a => a.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
-    }
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-    {
-      if (env.EnvironmentName == Environments.Development)
-      {
-        app.UseDeveloperExceptionPage();
-      }
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddStorage();
+            services.AddSingleton<Messages>();
+            services.AddHandlers();
+            services.AddSwaggerConfiguration();
+            services.AddControllers()
+                .AddNewtonsoftJson(a => a.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
+        }
 
-      app.UseSwaggerConfiguration();
-      app.UseRouting();
-      //app.UseCors();
-      app.UseEndpoints(endpoints => {
-        endpoints.MapControllers();
-      });
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.EnvironmentName == Environments.Development)
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseSwaggerConfiguration();
+            app.UseRouting();
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
     }
-  }
 }

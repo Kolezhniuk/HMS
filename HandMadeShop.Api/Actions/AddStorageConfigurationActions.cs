@@ -1,18 +1,17 @@
-using HandMadeShop.Domain.Repositories;
-using HandMadeShop.Domain.RepositoryAbstractions;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Raven.Client.Documents;
+using Raven.DependencyInjection;
 
 namespace HandMadeShop.Api.Actions
 {
-  public static class AddStorageConfigurationActions
-  {
-    public static void AddStorage(this IServiceCollection serviceCollection, IConfiguration configuration)
+    public static class AddStorageConfigurationActions
     {
-      serviceCollection.Configure<Domain.Options.StorageContextOptions>
-          (o => o.ConnectionString = configuration.GetConnectionString("Default"));
-      serviceCollection.AddTransient<Domain.Interfaces.IStorageContext, Domain.StorageContext>();
-      serviceCollection.AddTransient(typeof(IDeliveryMethodRepository), typeof(DeliveryMethodRepository));
+        public static void AddStorage(this IServiceCollection services)
+        {
+            //1. Configures Raven using the settings in appsettings.json.
+            services.AddRavenDbDocStore();
+            // 2. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession() instead.
+            services.AddTransient(sp => sp.GetRequiredService<IDocumentStore>().OpenAsyncSession());
+        }
     }
-  }
 }

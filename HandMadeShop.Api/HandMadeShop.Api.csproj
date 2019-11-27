@@ -1,31 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <!--<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>-->
-    <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <!--<PackageReference Include="Microsoft.AspNetCore.App" />-->
-    <!--<PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />-->
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
-    <PackageReference Include="Microsoft.OpenApi" Version="1.1.4" />
-    <PackageReference Include="NSwag.AspNetCore" Version="13.1.2" />
-      <PackageReference Include="Serilog.AspNetCore" Version="3.0.0" />
-      <PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1" />
-      <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.0.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0"/>
+        <PackageReference Include="Microsoft.OpenApi" Version="1.1.4"/>
+        <PackageReference Include="NSwag.AspNetCore" Version="13.1.2"/>
+        <PackageReference Include="RavenDB.DependencyInjection" Version="3.0.0"/>
+        <PackageReference Include="Serilog.AspNetCore" Version="3.0.0"/>
+        <PackageReference Include="Serilog.Sinks.ColoredConsole" Version="3.0.1"/>
+        <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.0.0"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HandMadeShop.Domain\HandMadeShop.Domain.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\HandMadeShop.Core\HandMadeShop.Core.csproj"/>
+        <ProjectReference Include="..\HandMadeShop.Logic\HandMadeShop.Logic.csproj"/>
+    </ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath></OutputPath>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-    <NoWarn>1701;1702;1591</NoWarn>
-  </PropertyGroup>
+    <ItemGroup>
+        <Folder Include="Middleware"/>
+    </ItemGroup>
+
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <OutputPath>Exe</OutputPath>
+        <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+        <NoWarn>1701;1702;1591</NoWarn>
+    </PropertyGroup>
 
 
 </Project>
