@@ -1,34 +1,45 @@
 version: '3.7'
 
 services:
-  #  elasticsearch:
-  #    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
-  #    environment:
-  #      - cluster.name=docker-cluster
-  #      - bootstrap.memory_lock=true
-  #      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-  #    ulimits:
-  #      memlock:
-  #        soft: -1
-  #        hard: -1
-  #    ports:
-  #      - "9200:9200"
-  #    networks:
-  #      logmetric:
-  #
-  #  kibana:
-  #    image: docker.elastic.co/kibana/kibana:6.3.2
-  #    ports:
-  #      - "5601:5601"
-  #    networks:
-  #      logmetric:
-  #        
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.4.0
+    container_name: elasticsearch1
+    environment:
+      - node.name=elasticsearch1
+      - cluster.name=docker-cluster
+      - cluster.initial_master_nodes=elasticsearch1
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+      - network.host=_eth0_
+    ulimits:
+      nproc: 65535
+      memlock:
+        soft: -1
+        hard: -1
+    cap_add:
+      - ALL
+    ports:
+      - "9200:9200"
+    volumes:
+      - '.\logs:/usr/share/elasticsearch/data'
+    networks:
+      logmetric:
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.4.0
+    ports:
+      - "5601:5601"
+    networks:
+      logmetric:
+
   ravendb:
     image: ravendb/ravendb
     ports:
       - 8080:8080
     volumes:
-      - 'C:\Users\dmytro.kolezhniuk\Desktop\shop\HandMadeShop\db:/opt/RavenDB/Server/RavenData'
+      - '.\db:/opt/RavenDB/Server/RavenData'
     networks:
       ravendb-net:
 
@@ -40,12 +51,3 @@ networks:
   logmetric:
     driver: 'bridge'
     
-
-#  mongo-cqrs:
-#    image: "mongo:latest"
-#    ports:
-#      - "27017:27017"
-#    volumes:
-#      - db:/data/db
-#  
-#

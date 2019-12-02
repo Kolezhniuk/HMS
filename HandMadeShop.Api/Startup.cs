@@ -23,8 +23,7 @@ namespace HandMadeShop.Api
             services.AddSingleton<Messages>();
             services.AddHandlers();
             services.AddSwaggerConfiguration();
-            services.AddControllers()
-                .AddNewtonsoftJson(a => a.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
