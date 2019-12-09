@@ -88,7 +88,11 @@ namespace HandMadeShop.Api.Actions
             if (IsHandlerInterface(parameterType))
                 return current;
 
-            var service = provider.GetService(parameterType);
+            var service = provider.GetRequiredService<IServiceScopeFactory>()
+                .CreateScope()
+                .ServiceProvider
+                .GetService(parameterType);
+
             if (service != null)
                 return service;
 

@@ -5,18 +5,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Folder Include="Domain\DeliveryMethod"/>
-        <Folder Include="Interfaces"/>
+        <Folder Include="Domain\DeliveryMethod" />
+        <Folder Include="Domain\User\Queries\" />
+        <Folder Include="Interfaces" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\HandMadeShop.Core\HandMadeShop.Core.csproj"/>
-        <ProjectReference Include="..\HandMadeShop.Dtos\HandMadeShop.Dtos.csproj"/>
+        <ProjectReference Include="..\HandMadeShop.Core\HandMadeShop.Core.csproj" />
+        <ProjectReference Include="..\HandMadeShop.Dtos\HandMadeShop.Dtos.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.CSharp" Version="4.6.0"/>
-        <PackageReference Include="RavenDB.Client" Version="4.1.4"/>
+        <PackageReference Include="Microsoft.CSharp" Version="4.6.0" />
+        <PackageReference Include="RavenDB.Client" Version="4.2.5" />
     </ItemGroup>
 
 </Project>
