@@ -22,6 +22,8 @@ namespace HandMadeShop.Api
             services.AddStorage();
             services.AddSingleton<Messages>();
             services.AddHandlers();
+            services.AddAuthentication();
+            services.AddAuthorization();
             services.AddSwaggerConfiguration();
             services.AddControllers();
         }
@@ -35,6 +37,10 @@ namespace HandMadeShop.Api
 
             app.UseSwaggerConfiguration();
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.InitDatabase();
+            app.SeedData();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
