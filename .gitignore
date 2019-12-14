@@ -263,3 +263,5 @@ __pycache__/
 *.pyc
 /HandMadeShop.Api/appsettings.Vital.json
 /HandMadeShop.Api/exe/*
+/db
+/logs
