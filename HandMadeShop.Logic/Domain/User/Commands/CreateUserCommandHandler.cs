@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using HandMadeShop.Core.Models;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Identity;
@@ -11,13 +10,13 @@ namespace HandMadeShop.Logic.Domain.User.Commands
     public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
     {
         private readonly IAsyncDocumentSession _session;
-        private readonly SignInManager<AppUser> _signInManager;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<Core.Models.User> _signInManager;
+        private readonly UserManager<Core.Models.User> _userManager;
 
         public CreateUserCommandHandler(
             IAsyncDocumentSession session,
-            UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager)
+            UserManager<Core.Models.User> userManager,
+            SignInManager<Core.Models.User> signInManager)
         {
             _session = session;
             _userManager = userManager;
@@ -26,7 +25,7 @@ namespace HandMadeShop.Logic.Domain.User.Commands
 
         public async Task<CommandResult> Handle(CreateUserCommand command)
         {
-            var newUser = new AppUser
+            var newUser = new Core.Models.User
             {
                 UserName = command.NewUserDto.FirstName,
                 LastName = command.NewUserDto.LastName,

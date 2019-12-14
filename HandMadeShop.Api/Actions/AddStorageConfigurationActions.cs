@@ -1,8 +1,8 @@
+using HandMadeShop.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Raven.Client.Documents;
 using Raven.DependencyInjection;
 using Raven.Identity;
-using HandMadeShop.Core.Models;
 
 namespace HandMadeShop.Api.Actions
 {
@@ -17,8 +17,9 @@ namespace HandMadeShop.Api.Actions
                 options.BeforeInitializeDocStore = docStore => docStore.Conventions.IdentityPartsSeparator = "-";
             });
             // 2. Add a scoped IAsyncDocumentSession. For the sync version, use .AddRavenSession() instead.
-            services.AddTransient(sp => sp.GetRequiredService<IDocumentStore>().OpenAsyncSession())
-                .AddRavenDbIdentity<AppUser>(); // Use Raven to manage users and roles.
+            services.AddTransient(sp => sp.GetRequiredService<IDocumentStore>().OpenAsyncSession());
+            services.AddIdentity<User, IdentityRole>()
+                .AddRavenDbIdentityStores<User, IdentityRole>();
         }
     }
 }

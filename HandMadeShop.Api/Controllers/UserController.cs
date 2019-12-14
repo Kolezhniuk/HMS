@@ -1,15 +1,16 @@
 ﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using HandMadeShop.Dtos.User;
 using HandMadeShop.Logic.Domain.User.Commands;
 using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HandMadeShop.Api.Controllers
 {
     public class UserController : BaseController
     {
         private readonly Messages _messages;
+
         public UserController(Messages messages)
         {
             _messages = messages;
@@ -27,7 +28,7 @@ namespace HandMadeShop.Api.Controllers
         [HttpGet("Authorize_Test")]
         public async Task<IActionResult> AuthorizeOnly()
         {
-            return Ok();
+            return await Task.FromResult(Ok());
         }
 
         //Just for test
