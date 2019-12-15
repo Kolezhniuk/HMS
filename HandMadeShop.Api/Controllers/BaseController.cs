@@ -1,32 +1,71 @@
+using System;
 using System.Net;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using HandMadeShop.Api.Extensions;
 using HandMadeShop.Api.Utils;
-using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace HandMadeShop.Api.Controllers
 {
-    public class BaseController : Controller
+    public abstract class BaseController : Controller
     {
-        protected new IActionResult Ok()
+        protected BaseController(ILogger logger)
         {
-            return base.Ok(ResponseWrapper.Ok());
+            Logger = logger;
         }
 
-        protected IActionResult Ok<T>(T result)
+        protected ILogger Logger { get; }
+
+        protected IActionResult Ok<T>(T result) => base.Ok(new ApiResponse<T>(result));
+
+        protected IActionResult Error(string errorMessage) =>
+            BadRequest(new ApiException(HttpStatusCode.BadRequest, errorMessage));
+
+        protected async Task<ApiResponse<T>> Catch<T>(Func<Task<T>> action, [CallerFilePath] string file = null,
+            [CallerMemberName] string member = null, [CallerLineNumber] int line = 0)
         {
-            return base.Ok(ResponseWrapper.Ok(result));
+            try
+            {
+                return new ApiResponse<T>(await action());
+            }
+            catch (ApiException e)
+            {
+                Logger.Error(e, file, member, line);
+                return new ApiResponse<T>(e.Status, e.Message);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e, file, member, line);
+                return new ApiResponse<T>(HttpStatusCode.InternalServerError, e.ToString());
+            }
         }
 
-        protected IActionResult Error(string errorMessage)
+        protected async Task Catch(Func<Task> action, [CallerFilePath] string file = null,
+            [CallerMemberName] string member = null, [CallerLineNumber] int line = 0)
         {
-            return BadRequest(ResponseWrapper.Error(errorMessage));
+            try
+            {
+                await action();
+            }
+            catch (ApiException e)
+            {
+                Logger.Error(e, file, member, line);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e, file, member, line);
+            }
         }
 
-        protected IActionResult FromResult(CommandResult commandResult, HttpStatusCode statusCode = HttpStatusCode.OK)
+        protected void ThrowIfModelInvalid()
         {
-            if (commandResult.IsSuccess && commandResult.Payload != null)
-                return StatusCode((int) statusCode, commandResult.Payload);
-            return commandResult.IsSuccess ? StatusCode((int) statusCode) : Error(commandResult.Error);
+            if (!ModelState.IsValid)
+            {
+                throw new ApiException(HttpStatusCode.BadRequest,
+                    $"Model is invalid! Error: {ModelState.GetDebugError()}");
+            }
         }
     }
 }

@@ -24,7 +24,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Queries
             }
 
             public async Task<IEnumerable<MeasureDto>> Handle(GetAllMeasuresQuery query) =>
-                (await _session.Query<Core.Models.Measure>().ToListAsync())
+                (await _session.Query<Core.DomainEntities.Measure>().ToListAsync())
                 .Select(i => new MeasureDto
                 {
                     Id = i.Id,

@@ -2,7 +2,7 @@ using System;
 
 namespace HandMadeShop.Dtos.Product
 {
-    public class AddProductDto
+    public class UpdateProductDto
     {
         public string Name { get; set; }
         public string Description { get; set; }

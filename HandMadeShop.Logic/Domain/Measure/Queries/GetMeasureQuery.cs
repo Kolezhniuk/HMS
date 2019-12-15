@@ -20,7 +20,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Queries
 
             public async Task<MeasureDto> Handle(GetMeasureQuery query)
             {
-                var measure = await _session.LoadAsync<Core.Models.Measure>(query.Id);
+                var measure = await _session.LoadAsync<Core.DomainEntities.Measure>(query.Id);
 
                 return new MeasureDto
                 {

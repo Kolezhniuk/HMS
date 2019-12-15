@@ -11,7 +11,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\HandMadeShop.Core\HandMadeShop.Core.csproj" />
         <ProjectReference Include="..\HandMadeShop.Dtos\HandMadeShop.Dtos.csproj" />
     </ItemGroup>
 
@@ -21,6 +20,7 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.0"/>
         <PackageReference Include="RavenDB.Client" Version="4.2.6"/>
         <PackageReference Include="RavenDB.Identity" Version="7.0.0"/>
+        <PackageReference Include="System.Text.Json" Version="4.7.0"/>
     </ItemGroup>
 
 </Project>

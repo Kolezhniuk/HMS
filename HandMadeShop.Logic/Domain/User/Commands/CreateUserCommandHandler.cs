@@ -10,13 +10,13 @@ namespace HandMadeShop.Logic.Domain.User.Commands
     public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
     {
         private readonly IAsyncDocumentSession _session;
-        private readonly SignInManager<Core.Models.User> _signInManager;
-        private readonly UserManager<Core.Models.User> _userManager;
+        private readonly SignInManager<Core.DomainEntities.User> _signInManager;
+        private readonly UserManager<Core.DomainEntities.User> _userManager;
 
         public CreateUserCommandHandler(
             IAsyncDocumentSession session,
-            UserManager<Core.Models.User> userManager,
-            SignInManager<Core.Models.User> signInManager)
+            UserManager<Core.DomainEntities.User> userManager,
+            SignInManager<Core.DomainEntities.User> signInManager)
         {
             _session = session;
             _userManager = userManager;
@@ -25,7 +25,7 @@ namespace HandMadeShop.Logic.Domain.User.Commands
 
         public async Task<CommandResult> Handle(CreateUserCommand command)
         {
-            var newUser = new Core.Models.User
+            var newUser = new Core.DomainEntities.User
             {
                 UserName = command.NewUserDto.FirstName,
                 LastName = command.NewUserDto.LastName,

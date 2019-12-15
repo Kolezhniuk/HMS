@@ -20,11 +20,11 @@ namespace HandMadeShop.Logic.Utils.Decorators
 
         public Task<CommandResult> Handle(TCommand command)
         {
-            var commandJson = JsonSerializer.Serialize(command);
-            _logger.LogInformation(
-                $"Command handler of type {command.GetType().Name} processing payload: {commandJson}");
             try
             {
+                var commandJson = JsonSerializer.Serialize(command);
+                _logger.LogInformation(
+                    $"Command handler of type {command.GetType().Name} processing payload: {commandJson}");
                 return _handler.Handle(command);
             }
             catch (Exception e)

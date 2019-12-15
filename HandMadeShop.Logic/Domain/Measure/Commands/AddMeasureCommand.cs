@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
@@ -30,22 +29,14 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
 
             public async Task<CommandResult> Handle(AddMeasureCommand command)
             {
-                var measure = new Core.Models.Measure
+                var measure = new Core.DomainEntities.Measure
                 {
                     Name = command.Name,
                     Position = command.Position
                 };
 
-                try
-                {
-                    await _session.StoreAsync(measure);
-                    await _session.SaveChangesAsync();
-                }
-
-                catch (Exception e)
-                {
-                    return CommandResult.Fail(e.Message);
-                }
+                await _session.StoreAsync(measure);
+                await _session.SaveChangesAsync();
 
                 return CommandResult.Ok(measure.Id);
             }

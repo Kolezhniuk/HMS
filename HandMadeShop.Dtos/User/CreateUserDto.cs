@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HandMadeShop.Dtos.User
+﻿namespace HandMadeShop.Dtos.User
 {
     public class CreateUserDto
     {

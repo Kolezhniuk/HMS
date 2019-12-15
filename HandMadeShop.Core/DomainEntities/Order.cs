@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HandMadeShop.Core.Models
+namespace HandMadeShop.Core.DomainEntities
 {
     public class Order
     {

@@ -31,7 +31,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
 
             public async Task<CommandResult> Handle(BulkInsertMeasureCommand command)
             {
-                var measuresList = command.MeasureDtos.Select(i => new Core.Models.Measure
+                var measuresList = command.MeasureDtos.Select(i => new Core.DomainEntities.Measure
                 {
                     Name = i.Name,
                     Position = i.Position

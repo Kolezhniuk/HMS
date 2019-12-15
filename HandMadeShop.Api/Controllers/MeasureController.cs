@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using HandMadeShop.Api.Utils;
 using HandMadeShop.Dtos.Measure;
 using HandMadeShop.Logic.Domain.Measure.Commands;
 using HandMadeShop.Logic.Domain.Measure.Queries;
 using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace HandMadeShop.Api.Controllers
 {
@@ -19,7 +20,7 @@ namespace HandMadeShop.Api.Controllers
     {
         private readonly Messages _messages;
 
-        public MeasureController(Messages messages)
+        public MeasureController(ILogger logger, Messages messages) : base(logger)
         {
             _messages = messages;
         }
@@ -38,38 +39,44 @@ namespace HandMadeShop.Api.Controllers
             return Ok(result);
         }
 
+        //TODO think about correct statuses passing.
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<IActionResult> AddNew(WriteMeasureDto dto)
-        {
-            var command = new AddMeasureCommand(dto.Name, dto.Position);
-            var result = await _messages.DispatchCommand(command);
-            return FromResult(result, HttpStatusCode.Created);
-        }
+        public Task<ApiResponse<string>> AddNew(WriteMeasureDto dto)
+            => Catch(async () =>
+            {
+                var command = new AddMeasureCommand(dto.Name, dto.Position);
+                var result = await _messages.DispatchCommand(command);
+                return result.Payload;
+            });
 
         [HttpPost("bulk")]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<IActionResult> Bulk(List<WriteMeasureDto> dtos)
-        {
-            var command = new BulkInsertMeasureCommand(dtos);
-            var result = await _messages.DispatchCommand(command);
-            return FromResult(result, HttpStatusCode.Created);
-        }
+        public Task<ApiResponse<bool>> Bulk(List<WriteMeasureDto> dtos)
+            => Catch(async () =>
+            {
+                var command = new BulkInsertMeasureCommand(dtos);
+                await _messages.DispatchCommand(command);
+                return true;
+            });
 
+        //TODO think about escaping string id.
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> Bulk(string id, WriteMeasureDto dto)
-        {
-            var command = new UpdateMeasureCommand(Uri.UnescapeDataString(id), dto.Name, dto.Position);
-            var result = await _messages.DispatchCommand(command);
-            return FromResult(result);
-        }
+        public Task<ApiResponse<bool>> Bulk(string id, WriteMeasureDto dto)
+            => Catch(async () =>
+            {
+                var command = new UpdateMeasureCommand(Uri.UnescapeDataString(id), dto.Name, dto.Position);
+                await _messages.DispatchCommand(command);
+                return true;
+            });
 
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var command = new DeleteMeasureCommand(Uri.UnescapeDataString(id));
-            var result = await _messages.DispatchCommand(command);
-            return FromResult(result);
-        }
+        public Task<ApiResponse<bool>> Delete(string id)
+            => Catch(async () =>
+            {
+                var command = new DeleteMeasureCommand(Uri.UnescapeDataString(id));
+                await _messages.DispatchCommand(command);
+                return true;
+            });
     }
 }

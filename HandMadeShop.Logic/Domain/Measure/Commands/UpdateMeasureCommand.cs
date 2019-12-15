@@ -32,7 +32,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
             {
                 try
                 {
-                    var entity = await _session.LoadAsync<Core.Models.Measure>(command.Id);
+                    var entity = await _session.LoadAsync<Core.DomainEntities.Measure>(command.Id);
                     entity.Name = command.Name;
                     entity.Position = command.Position;
                     await _session.SaveChangesAsync();

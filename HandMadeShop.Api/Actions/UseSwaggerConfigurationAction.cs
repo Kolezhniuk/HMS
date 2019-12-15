@@ -2,12 +2,12 @@
 
 namespace HandMadeShop.Api.Actions
 {
-  public static class UseSwaggerConfigurationAction
-  {
-    public static void UseSwaggerConfiguration(this IApplicationBuilder applicationBuilder)
+    public static class UseSwaggerConfigurationAction
     {
-      applicationBuilder.UseOpenApi();
-      applicationBuilder.UseSwaggerUi3();
+        public static void UseSwaggerConfiguration(this IApplicationBuilder applicationBuilder)
+        {
+            applicationBuilder.UseOpenApi();
+            applicationBuilder.UseSwaggerUi3();
+        }
     }
-  }
 }

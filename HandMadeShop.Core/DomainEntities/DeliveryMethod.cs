@@ -1,6 +1,6 @@
-﻿namespace HandMadeShop.Core.Models
+﻿namespace HandMadeShop.Core.DomainEntities
 {
-    public class Measure
+    public class DeliveryMethod
     {
         public string Id { get; set; }
         public string Name { get; set; }

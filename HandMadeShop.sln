@@ -5,13 +5,13 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HandMadeShop.Api", "HandMadeShop.Api\HandMadeShop.Api.csproj", "{0048500E-89DF-401C-8897-758ACEBE0B3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandMadeShop.Core", "HandMadeShop.Core\HandMadeShop.Core.csproj", "{C1ADF973-2C64-478B-93D7-2DD39AEFC6D4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandMadeShop.Dtos", "HandMadeShop.Dtos\HandMadeShop.Dtos.csproj", "{6D931B41-EA71-4854-B42B-899255D4E5AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandMadeShop.Logic", "HandMadeShop.Logic\HandMadeShop.Logic.csproj", "{3E80C1B8-7D20-4911-A914-A417498DA96E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandMadeShop.Persistence", "HandMadeShop.Persistence\HandMadeShop.Persistence.csproj", "{A81C4DF9-0F22-45A8-9D3B-4458E7B85231}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandMadeShop.Infrastructure", "HandMadeShop.Infrastructure\HandMadeShop.Infrastructure.csproj", "{A81C4DF9-0F22-45A8-9D3B-4458E7B85231}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HandMadeShop.Core", "HandMadeShop.Core\HandMadeShop.Core.csproj", "{09FAD65E-D5F9-4897-BD36-13114E9429EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{0048500E-89DF-401C-8897-758ACEBE0B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0048500E-89DF-401C-8897-758ACEBE0B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0048500E-89DF-401C-8897-758ACEBE0B3B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1ADF973-2C64-478B-93D7-2DD39AEFC6D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1ADF973-2C64-478B-93D7-2DD39AEFC6D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1ADF973-2C64-478B-93D7-2DD39AEFC6D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1ADF973-2C64-478B-93D7-2DD39AEFC6D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6D931B41-EA71-4854-B42B-899255D4E5AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6D931B41-EA71-4854-B42B-899255D4E5AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D931B41-EA71-4854-B42B-899255D4E5AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,6 +35,10 @@ Global
 		{A81C4DF9-0F22-45A8-9D3B-4458E7B85231}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A81C4DF9-0F22-45A8-9D3B-4458E7B85231}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A81C4DF9-0F22-45A8-9D3B-4458E7B85231}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09FAD65E-D5F9-4897-BD36-13114E9429EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09FAD65E-D5F9-4897-BD36-13114E9429EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09FAD65E-D5F9-4897-BD36-13114E9429EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09FAD65E-D5F9-4897-BD36-13114E9429EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

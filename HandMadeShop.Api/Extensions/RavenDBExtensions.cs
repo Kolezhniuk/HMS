@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using HandMadeShop.Core.Models;
+using HandMadeShop.Core.DomainEntities;
 using Raven.Client.Documents;
 using Raven.Client.Exceptions.Database;
 using Raven.Client.ServerWide.Operations;

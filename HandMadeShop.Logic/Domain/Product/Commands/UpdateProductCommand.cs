@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using HandMadeShop.Core;
 using HandMadeShop.Dtos.Product;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
@@ -9,9 +8,9 @@ using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Product.Commands
 {
-    public sealed class AddProductCommand : ICommand
+    public sealed class UpdateProductCommand : ICommand
     {
-        public AddProductCommand(AddProductDto productDto)
+        public UpdateProductCommand(string id, UpdateProductDto productDto)
         {
             Name = productDto.Name;
             Description = productDto.Description;
@@ -34,6 +33,7 @@ namespace HandMadeShop.Logic.Domain.Product.Commands
             RatingAverage = productDto.RatingAverage;
         }
 
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
@@ -49,54 +49,28 @@ namespace HandMadeShop.Logic.Domain.Product.Commands
         public bool IsAvailable { get; set; }
         public int DisplayOrder { get; set; }
         public string Vendor { get; set; }
+
+        //TODO handle these properties
         public string PhotoUrl { get; set; }
         public string ThumbnailImage { get; set; }
         public int ReviewsCount { get; set; }
         public double? RatingAverage { get; set; }
 
         [AuditLog]
-        public class AddProductCommandHandler : ICommandHandler<AddProductCommand>
+        public class UpdateProductCommandHandler : ICommandHandler<UpdateProductCommand>
         {
             private readonly IAsyncDocumentSession _session;
-            private readonly RxEventWrapper _wrapper;
 
-            public AddProductCommandHandler(IAsyncDocumentSession session, RxEventWrapper wrapper)
+            public UpdateProductCommandHandler(IAsyncDocumentSession session)
             {
                 _session = session;
-                _wrapper = wrapper;
             }
 
-            public async Task<CommandResult> Handle(AddProductCommand command)
+            public async Task<CommandResult> Handle(UpdateProductCommand command)
             {
-                var product = new Core.DomainEntities.Product
-                {
-                    Name = command.Name,
-                    Description = command.Description,
-                    Category = command.Category,
-                    Measure = command.Measure,
-                    Price = command.Price,
-                    SpecialPrice = command.SpecialPrice,
-                    SpecialPriceStart = command.SpecialPriceStart,
-                    SpecialPriceEnd = command.SpecialPriceEnd,
-                    HasOptions = command.HasOptions,
-                    IsAllowToOrder = command.IsAllowToOrder,
-                    StockQuantity = command.StockQuantity,
-                    IsHidden = command.IsHidden,
-                    IsAvailable = command.IsAvailable,
-                    DisplayOrder = command.DisplayOrder,
-                    Vendor = command.Vendor,
-                    PhotoUrl = command.PhotoUrl,
-                    ThumbnailImage = command.ThumbnailImage,
-                    ReviewsCount = command.ReviewsCount,
-                    RatingAverage = command.RatingAverage
-                };
-
-                await _session.StoreAsync(product);
                 await _session.SaveChangesAsync();
 
-                _wrapper.Subject.OnNext(new ProductEvent() {Id = product.Id, Name = "Product Created"});
-
-                return CommandResult.Ok(product.Id);
+                return CommandResult.Ok();
             }
         }
     }

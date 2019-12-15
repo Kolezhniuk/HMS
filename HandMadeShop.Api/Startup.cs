@@ -1,4 +1,6 @@
 ﻿using HandMadeShop.Api.Actions;
+using HandMadeShop.Core;
+using HandMadeShop.Logic.Domain.Measure;
 using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +23,10 @@ namespace HandMadeShop.Api
         {
             services.AddStorage();
             services.AddSingleton<Messages>();
+            services.AddSingleton<RxEventWrapper>();
+            services.AddSingleton(typeof(MeasureEventListener<>));
             services.AddHandlers();
+            services.AddProjectServices();
             services.AddAuthentication();
             services.AddAuthorization();
             services.AddSwaggerConfiguration();

@@ -265,3 +265,4 @@ __pycache__/
 /HandMadeShop.Api/exe/*
 /db
 /logs
+/messaging-data

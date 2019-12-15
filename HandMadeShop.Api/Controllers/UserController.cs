@@ -1,9 +1,11 @@
 ﻿using System.Threading.Tasks;
+using HandMadeShop.Api.Utils;
 using HandMadeShop.Dtos.User;
 using HandMadeShop.Logic.Domain.User.Commands;
 using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace HandMadeShop.Api.Controllers
 {
@@ -11,18 +13,19 @@ namespace HandMadeShop.Api.Controllers
     {
         private readonly Messages _messages;
 
-        public UserController(Messages messages)
+        public UserController(ILogger logger, Messages messages) : base(logger)
         {
             _messages = messages;
         }
 
         [HttpPost("create-user")]
-        public async Task<IActionResult> CreateUser(CreateUserDto userDto)
-        {
-            var command = new CreateUserCommand(userDto);
-            var result = await _messages.DispatchCommand(command);
-            return FromResult(result);
-        }
+        public Task<ApiResponse<bool>> CreateUser(CreateUserDto userDto)
+            => Catch(async () =>
+            {
+                var command = new CreateUserCommand(userDto);
+                await _messages.DispatchCommand(command);
+                return true;
+            });
 
         [Authorize]
         [HttpGet("Authorize_Test")]

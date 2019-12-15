@@ -1,4 +1,4 @@
-namespace HandMadeShop.Core.Models
+namespace HandMadeShop.Core.DomainEntities
 {
     public class Supplier
     {

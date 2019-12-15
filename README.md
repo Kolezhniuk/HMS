@@ -14,6 +14,9 @@ Hand Made Shop
     - stop all infrastructure components `docker-compose stop`
     - remove all infrastructure  containers components `docker-compose rm -f`
     
-   Notes
-  * probably each member of team must have community license of Raven Db | https://ravendb.net/license/request/community
+* Kafka:
+    - https://github.com/TribalScale/kafka-waffle-stack
+    
+* Notes
+    - probably each member of team must have community license of Raven Db | https://ravendb.net/license/request/community
         
