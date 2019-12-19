@@ -32,7 +32,7 @@ namespace HandMadeShop.Logic.Utils
             var handlerType = type.MakeGenericType(typeArgs);
 
             dynamic handler = _provider.GetService(handlerType);
-            T result = await handler.Handle((dynamic) query);
+            T result = await handler.Handle(query);
 
             return result;
         }

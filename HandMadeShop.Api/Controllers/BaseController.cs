@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using HandMadeShop.Api.Extensions;
 using HandMadeShop.Api.Utils;
+using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -11,12 +12,16 @@ namespace HandMadeShop.Api.Controllers
 {
     public abstract class BaseController : Controller
     {
-        protected BaseController(ILogger logger)
+        protected readonly Messages _messages;
+
+        protected BaseController(Messages messages, ILogger logger)
         {
-            Logger = logger;
+            _logger = logger;
+            _messages = messages;
         }
 
-        protected ILogger Logger { get; }
+        protected ILogger _logger { get; }
+
 
         protected IActionResult Ok<T>(T result) => base.Ok(new ApiResponse<T>(result));
 
@@ -32,12 +37,12 @@ namespace HandMadeShop.Api.Controllers
             }
             catch (ApiException e)
             {
-                Logger.Error(e, file, member, line);
+                _logger.Error(e, file, member, line);
                 return new ApiResponse<T>(e.Status, e.Message);
             }
             catch (Exception e)
             {
-                Logger.Error(e, file, member, line);
+                _logger.Error(e, file, member, line);
                 return new ApiResponse<T>(HttpStatusCode.InternalServerError, e.ToString());
             }
         }
@@ -51,11 +56,11 @@ namespace HandMadeShop.Api.Controllers
             }
             catch (ApiException e)
             {
-                Logger.Error(e, file, member, line);
+                _logger.Error(e, file, member, line);
             }
             catch (Exception e)
             {
-                Logger.Error(e, file, member, line);
+                _logger.Error(e, file, member, line);
             }
         }
 

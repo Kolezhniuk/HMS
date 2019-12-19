@@ -18,11 +18,8 @@ namespace HandMadeShop.Api.Controllers
     [Route("api/v1/[controller]")]
     public class MeasureController : BaseController
     {
-        private readonly Messages _messages;
-
-        public MeasureController(ILogger logger, Messages messages) : base(logger)
+        public MeasureController(ILogger logger, Messages messages) : base(messages, logger)
         {
-            _messages = messages;
         }
 
         [HttpGet]

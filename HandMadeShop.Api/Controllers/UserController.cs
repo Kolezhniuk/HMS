@@ -11,11 +11,8 @@ namespace HandMadeShop.Api.Controllers
 {
     public class UserController : BaseController
     {
-        private readonly Messages _messages;
-
-        public UserController(ILogger logger, Messages messages) : base(logger)
+        public UserController(Messages messages, ILogger logger) : base(messages, logger)
         {
-            _messages = messages;
         }
 
         [HttpPost("create-user")]
@@ -33,22 +30,5 @@ namespace HandMadeShop.Api.Controllers
         {
             return await Task.FromResult(Ok());
         }
-
-        //Just for test
-        //[HttpPost("test")]
-        //public async Task<IActionResult> TestAddUser()
-        //{
-        //    var createUserDto = new CreateUserDto()
-        //    {
-        //        FirstName = "Sem",
-        //        LastName = "Mat",
-        //        Email = "Mat1@gmail.com",
-        //        Password = "Mat1@gmail.com"
-        //    };
-        //
-        //    var command = new CreateUserCommand(createUserDto);
-        //    var result = await _messages.DispatchCommand(command);
-        //    return FromResult(result);
-        //}
     }
 }

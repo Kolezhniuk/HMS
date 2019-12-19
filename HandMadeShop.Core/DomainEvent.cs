@@ -1,6 +1,6 @@
 namespace HandMadeShop.Core
 {
-    public abstract class AppEvent
+    public abstract class DomainEvent
     {
         public string Id { get; set; }
         public string Name { get; set; }

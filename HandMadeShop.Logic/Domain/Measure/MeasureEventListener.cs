@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace HandMadeShop.Logic.Domain.Measure
 {
-    public class MeasureEventListener<T> : IDisposable where T : AppEvent
+    public class MeasureEventListener<T> : IDisposable where T : DomainEvent
     {
         private readonly ILogger _logger;
         private readonly RxEventWrapper _rxEventWrapper;

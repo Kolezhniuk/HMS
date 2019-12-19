@@ -19,12 +19,11 @@ namespace HandMadeShop.Api.Controllers
     public class ProductController : BaseController
     {
         private readonly MeasureEventListener<ProductEvent> _listener;
-        private readonly Messages _messages;
 
-        public ProductController(ILogger logger, Messages messages, MeasureEventListener<ProductEvent> listener) :
-            base(logger)
+        public ProductController(Messages messages, ILogger logger, MeasureEventListener<ProductEvent> listener)
+            : base(messages, logger)
+
         {
-            _messages = messages;
             _listener = listener;
             _listener.Listen();
         }
