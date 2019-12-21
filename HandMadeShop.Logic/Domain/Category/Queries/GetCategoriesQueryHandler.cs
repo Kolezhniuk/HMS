@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HandMadeShop.Dtos.Category;
-using HandMadeShop.Infrastrucutre.Interfaces;
+using HandMadeShop.Logic.Interfaces;
 
-namespace HandMadeShop.Infrastrucutre.Domain.Category.Queries
+namespace HandMadeShop.Logic.Domain.Category.Queries
 {
     internal sealed class GetCategoriesQueryHandler : IQueryHandler<GetCategoriesQuery, IEnumerable<CategoryDto>>
     {

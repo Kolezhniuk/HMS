@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using HandMadeShop.Infrastrucutre.Interfaces;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
 

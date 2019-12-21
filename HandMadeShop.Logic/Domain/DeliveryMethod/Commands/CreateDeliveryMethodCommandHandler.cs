@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
 
-namespace HandMadeShop.Infrastrucutre.Domain.DeliveryMethod.Commands
+namespace HandMadeShop.Logic.Domain.DeliveryMethod.Commands
 {
     public class CreateDeliveryMethodCommandHandler : ICommandHandler<CreateDeliveryMethodCommand>
     {

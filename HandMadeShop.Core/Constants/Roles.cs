@@ -1,4 +1,4 @@
-namespace HandMadeShop.Infrastrucutre.Constants
+namespace HandMadeShop.Core.Constants
 {
     public static class Roles
     {

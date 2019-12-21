@@ -1,6 +1,6 @@
 using HandMadeShop.Logic.Interfaces;
 
-namespace HandMadeShop.Infrastrucutre.Domain.Category.Commands
+namespace HandMadeShop.Logic.Domain.Category.Commands
 {
     public sealed class CreateCategoryCommand : ICommand
     {

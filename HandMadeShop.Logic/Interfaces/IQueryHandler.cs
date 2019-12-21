@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace HandMadeShop.Infrastrucutre.Interfaces
+namespace HandMadeShop.Logic.Interfaces
 {
     public interface IQueryHandler<in TQuery, TResult>
         where TQuery : IQuery<TResult>

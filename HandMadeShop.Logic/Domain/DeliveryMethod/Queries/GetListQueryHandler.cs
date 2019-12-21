@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HandMadeShop.Dtos.DeliveryMethod;
-using HandMadeShop.Infrastrucutre.Interfaces;
+using HandMadeShop.Logic.Interfaces;
 
-namespace HandMadeShop.Infrastrucutre.Domain.DeliveryMethod.Queries
+namespace HandMadeShop.Logic.Domain.DeliveryMethod.Queries
 {
     internal sealed class GetListQueryHandler : IQueryHandler<GetListQuery, IEnumerable<DeliveryMethodDto>>
     {

@@ -1,7 +1,7 @@
 ﻿using HandMadeShop.Dtos.User;
 using HandMadeShop.Logic.Interfaces;
 
-namespace HandMadeShop.Infrastrucutre.Domain.User.Commands
+namespace HandMadeShop.Logic.Domain.User.Commands
 {
     public class CreateUserCommand : ICommand
     {

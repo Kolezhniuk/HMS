@@ -1,6 +1,6 @@
 using HandMadeShop.Core;
 
-namespace HandMadeShop.Infrastrucutre.Domain.Product
+namespace HandMadeShop.Logic.Domain.Product
 {
     public class ProductCreatedEvent : DomainEvent
     {

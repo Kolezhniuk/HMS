@@ -1,5 +1,5 @@
 using System;
-using HandMadeShop.Infrastrucutre.Domain.Product;
+using HandMadeShop.Logic.Domain.Product;
 using HandMadeShop.Logic.Domain.User.Events;
 using HandMadeShop.Logic.Utils;
 using Microsoft.Extensions.Logging;

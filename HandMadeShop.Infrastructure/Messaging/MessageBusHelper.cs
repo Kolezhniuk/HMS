@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace HandMadeShop.Infrastrucutre.Messaging
+namespace HandMadeShop.Infrastructure.Messaging
 {
     public static class MessageBusHelper
     {

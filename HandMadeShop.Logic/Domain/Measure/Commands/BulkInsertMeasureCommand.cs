@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HandMadeShop.Dtos.Measure;
-using HandMadeShop.Infrastrucutre.Utils.Decorators;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
+using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents;
 
 namespace HandMadeShop.Logic.Domain.Measure.Commands
@@ -31,7 +31,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
 
             public async Task<CommandResult> Handle(BulkInsertMeasureCommand command)
             {
-                var measuresList = command.MeasureDtos.Select(i => new Infrastrucutre.DomainEntities.Measure
+                var measuresList = command.MeasureDtos.Select(i => new Core.DomainEntities.Measure
                 {
                     Name = i.Name,
                     Position = i.Position

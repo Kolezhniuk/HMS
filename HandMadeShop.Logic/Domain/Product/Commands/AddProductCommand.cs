@@ -1,10 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using HandMadeShop.Dtos.Product;
-using HandMadeShop.Infrastrucutre.Domain.Product;
-using HandMadeShop.Infrastrucutre.Utils.Decorators;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
+using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Product.Commands
@@ -68,7 +67,7 @@ namespace HandMadeShop.Logic.Domain.Product.Commands
 
             public async Task<CommandResult> Handle(AddProductCommand command)
             {
-                var product = new Infrastrucutre.DomainEntities.Product
+                var product = new Core.DomainEntities.Product
                 {
                     Name = command.Name,
                     Description = command.Description,

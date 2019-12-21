@@ -1,6 +1,6 @@
 ﻿using Raven.Identity;
 
-namespace HandMadeShop.Infrastrucutre.DomainEntities
+namespace HandMadeShop.Core.DomainEntities
 {
     public class User : IdentityUser
     {

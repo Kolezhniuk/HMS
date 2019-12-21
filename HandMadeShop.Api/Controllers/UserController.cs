@@ -2,7 +2,7 @@
 using HandMadeShop.Api.Utils;
 using HandMadeShop.Dtos.User;
 using HandMadeShop.Infrastructure.Messaging;
-using HandMadeShop.Infrastrucutre.Domain.User.Commands;
+using HandMadeShop.Logic.Domain.User.Commands;
 using HandMadeShop.Logic.Domain.User.Events;
 using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Authorization;

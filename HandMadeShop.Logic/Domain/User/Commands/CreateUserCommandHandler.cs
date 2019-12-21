@@ -5,18 +5,18 @@ using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Identity;
 using Raven.Client.Documents.Session;
 
-namespace HandMadeShop.Infrastrucutre.Domain.User.Commands
+namespace HandMadeShop.Logic.Domain.User.Commands
 {
     public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
     {
         private readonly IAsyncDocumentSession _session;
-        private readonly SignInManager<DomainEntities.User> _signInManager;
-        private readonly UserManager<DomainEntities.User> _userManager;
+        private readonly SignInManager<Core.DomainEntities.User> _signInManager;
+        private readonly UserManager<Core.DomainEntities.User> _userManager;
 
         public CreateUserCommandHandler(
             IAsyncDocumentSession session,
-            UserManager<DomainEntities.User> userManager,
-            SignInManager<DomainEntities.User> signInManager)
+            UserManager<Core.DomainEntities.User> userManager,
+            SignInManager<Core.DomainEntities.User> signInManager)
         {
             _session = session;
             _userManager = userManager;
@@ -25,7 +25,7 @@ namespace HandMadeShop.Infrastrucutre.Domain.User.Commands
 
         public async Task<CommandResult> Handle(CreateUserCommand command)
         {
-            var newUser = new DomainEntities.User
+            var newUser = new Core.DomainEntities.User
             {
                 UserName = command.NewUserDto.FirstName,
                 LastName = command.NewUserDto.LastName,

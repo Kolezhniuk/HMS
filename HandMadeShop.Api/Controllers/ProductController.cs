@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using HandMadeShop.Api.Utils;
 using HandMadeShop.Dtos.Product;
 using HandMadeShop.Infrastructure.Messaging;
-using HandMadeShop.Infrastrucutre.Domain.Product.Queries;
 using HandMadeShop.Logic.Domain.Product.Commands;
+using HandMadeShop.Logic.Domain.Product.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 

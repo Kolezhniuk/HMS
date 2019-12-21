@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using HandMadeShop.Dtos.Category;
-using HandMadeShop.Infrastrucutre.Interfaces;
+using HandMadeShop.Logic.Interfaces;
 
-namespace HandMadeShop.Infrastrucutre.Domain.Category.Queries
+namespace HandMadeShop.Logic.Domain.Category.Queries
 {
     public class GetCategoriesQuery : IQuery<IEnumerable<CategoryDto>>
     {

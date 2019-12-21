@@ -1,6 +1,6 @@
 using HandMadeShop.Core;
 
-namespace HandMadeShop.Infrastrucutre.Handlers
+namespace HandMadeShop.Logic.Interfaces
 {
     public interface IEventHandler<T> where T : DomainEvent
     {

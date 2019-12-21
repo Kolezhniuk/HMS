@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using HandMadeShop.Api.Extensions;
-using HandMadeShop.Infrastrucutre.Constants;
+using HandMadeShop.Core.Constants;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Raven.Client.Documents;
