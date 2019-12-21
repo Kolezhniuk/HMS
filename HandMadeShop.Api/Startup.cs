@@ -1,7 +1,4 @@
 ﻿using HandMadeShop.Api.Actions;
-using HandMadeShop.Core;
-using HandMadeShop.Logic.Domain.Measure;
-using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,23 +19,19 @@ namespace HandMadeShop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddStorage();
-            services.AddSingleton<Messages>();
-            services.AddSingleton<RxEventWrapper>();
-            services.AddSingleton(typeof(MeasureEventListener<>));
-            services.AddHandlers();
+            services.RegisterHandlers();
             services.AddProjectServices();
             services.AddAuthentication();
             services.AddAuthorization();
             services.AddSwaggerConfiguration();
             services.AddControllers();
+            services.AddProjectServices();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            AddEventHandlersConfiguration configuration)
         {
-            if (env.EnvironmentName == Environments.Development)
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.EnvironmentName == Environments.Development) app.UseDeveloperExceptionPage();
 
             app.UseSwaggerConfiguration();
             app.UseRouting();
@@ -47,6 +40,7 @@ namespace HandMadeShop.Api
             app.InitDatabase();
             app.SeedData();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            configuration.UseListeners();
         }
     }
 }

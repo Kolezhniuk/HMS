@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\HandMadeShop.Infrastructure\HandMadeShop.Infrastructure.csproj"/>
         <ProjectReference Include="..\HandMadeShop.Logic\HandMadeShop.Logic.csproj" />
     </ItemGroup>
 

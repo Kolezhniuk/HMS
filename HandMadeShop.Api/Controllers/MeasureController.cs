@@ -4,9 +4,9 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using HandMadeShop.Api.Utils;
 using HandMadeShop.Dtos.Measure;
+using HandMadeShop.Infrastructure.Messaging;
+using HandMadeShop.Infrastrucutre.Domain.Measure.Queries;
 using HandMadeShop.Logic.Domain.Measure.Commands;
-using HandMadeShop.Logic.Domain.Measure.Queries;
-using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -18,21 +18,21 @@ namespace HandMadeShop.Api.Controllers
     [Route("api/v1/[controller]")]
     public class MeasureController : BaseController
     {
-        public MeasureController(ILogger logger, Messages messages) : base(messages, logger)
+        public MeasureController(MessageBus messageBus, ILogger logger) : base(messageBus, logger)
         {
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _messages.DispatchQuery(new GetAllMeasuresQuery());
+            var result = await MessageBus.PublishQuery(new GetAllMeasuresQuery());
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            var result = await _messages.DispatchQuery(new GetMeasureQuery() {Id = Uri.UnescapeDataString(id)});
+            var result = await MessageBus.PublishQuery(new GetMeasureQuery {Id = Uri.UnescapeDataString(id)});
             return Ok(result);
         }
 
@@ -40,40 +40,48 @@ namespace HandMadeShop.Api.Controllers
         [HttpPost("add")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public Task<ApiResponse<string>> AddNew(WriteMeasureDto dto)
-            => Catch(async () =>
+        {
+            return Catch(async () =>
             {
                 var command = new AddMeasureCommand(dto.Name, dto.Position);
-                var result = await _messages.DispatchCommand(command);
+                var result = await MessageBus.DispatchCommand(command);
                 return result.Payload;
             });
+        }
 
         [HttpPost("bulk")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public Task<ApiResponse<bool>> Bulk(List<WriteMeasureDto> dtos)
-            => Catch(async () =>
+        {
+            return Catch(async () =>
             {
                 var command = new BulkInsertMeasureCommand(dtos);
-                await _messages.DispatchCommand(command);
+                await MessageBus.DispatchCommand(command);
                 return true;
             });
+        }
 
         //TODO think about escaping string id.
         [HttpPut("update/{id}")]
         public Task<ApiResponse<bool>> Bulk(string id, WriteMeasureDto dto)
-            => Catch(async () =>
+        {
+            return Catch(async () =>
             {
                 var command = new UpdateMeasureCommand(Uri.UnescapeDataString(id), dto.Name, dto.Position);
-                await _messages.DispatchCommand(command);
+                await MessageBus.DispatchCommand(command);
                 return true;
             });
+        }
 
         [HttpDelete("delete/{id}")]
         public Task<ApiResponse<bool>> Delete(string id)
-            => Catch(async () =>
+        {
+            return Catch(async () =>
             {
                 var command = new DeleteMeasureCommand(Uri.UnescapeDataString(id));
-                await _messages.DispatchCommand(command);
+                await MessageBus.DispatchCommand(command);
                 return true;
             });
+        }
     }
 }

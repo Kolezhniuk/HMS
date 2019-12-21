@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HandMadeShop.Dtos.Measure;
-using HandMadeShop.Logic.Interfaces;
+using HandMadeShop.Infrastrucutre.Interfaces;
 using Microsoft.Extensions.Logging;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
 
-namespace HandMadeShop.Logic.Domain.Measure.Queries
+namespace HandMadeShop.Infrastrucutre.Domain.Measure.Queries
 {
     public class GetAllMeasuresQuery : IQuery<IEnumerable<MeasureDto>>
     {
@@ -23,14 +23,16 @@ namespace HandMadeShop.Logic.Domain.Measure.Queries
                 _logger = logger;
             }
 
-            public async Task<IEnumerable<MeasureDto>> Handle(GetAllMeasuresQuery query) =>
-                (await _session.Query<Core.DomainEntities.Measure>().ToListAsync())
-                .Select(i => new MeasureDto
-                {
-                    Id = i.Id,
-                    Name = i.Name,
-                    Position = i.Position
-                });
+            public async Task<IEnumerable<MeasureDto>> Handle(GetAllMeasuresQuery query)
+            {
+                return (await _session.Query<DomainEntities.Measure>().ToListAsync())
+                    .Select(i => new MeasureDto
+                    {
+                        Id = i.Id,
+                        Name = i.Name,
+                        Position = i.Position
+                    });
+            }
         }
     }
 }

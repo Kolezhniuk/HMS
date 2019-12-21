@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
+using HandMadeShop.Infrastrucutre.Utils.Decorators;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
-using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Measure.Commands
@@ -29,7 +29,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
 
             public async Task<CommandResult> Handle(AddMeasureCommand command)
             {
-                var measure = new Core.DomainEntities.Measure
+                var measure = new Infrastrucutre.DomainEntities.Measure
                 {
                     Name = command.Name,
                     Position = command.Position

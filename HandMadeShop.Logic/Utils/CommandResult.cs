@@ -15,10 +15,10 @@ namespace HandMadeShop.Logic.Utils
             Error = error;
         }
 
-        public bool IsSuccess { get; private set; }
+        public bool IsSuccess { get; }
 
-        public string Error { get; private set; }
-        public string Payload { get; private set; }
+        public string Error { get; }
+        public string Payload { get; }
 
         public static CommandResult Ok()
         {

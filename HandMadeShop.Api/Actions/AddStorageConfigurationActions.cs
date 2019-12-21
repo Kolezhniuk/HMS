@@ -1,4 +1,4 @@
-using HandMadeShop.Core.DomainEntities;
+using HandMadeShop.Infrastrucutre.DomainEntities;
 using Microsoft.Extensions.DependencyInjection;
 using Raven.DependencyInjection;
 using Raven.Identity;

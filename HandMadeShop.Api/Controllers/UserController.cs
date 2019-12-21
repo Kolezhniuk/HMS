@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using HandMadeShop.Api.Utils;
 using HandMadeShop.Dtos.User;
-using HandMadeShop.Logic.Domain.User.Commands;
+using HandMadeShop.Infrastructure.Messaging;
+using HandMadeShop.Infrastrucutre.Domain.User.Commands;
+using HandMadeShop.Logic.Domain.User.Events;
 using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,23 +13,29 @@ namespace HandMadeShop.Api.Controllers
 {
     public class UserController : BaseController
     {
-        public UserController(Messages messages, ILogger logger) : base(messages, logger)
+        private readonly EventBus _eventBus;
+
+        public UserController(MessageBus messageBus, ILogger logger, EventBus eventBus) : base(messageBus, logger)
         {
+            _eventBus = eventBus;
         }
 
         [HttpPost("create-user")]
         public Task<ApiResponse<bool>> CreateUser(CreateUserDto userDto)
-            => Catch(async () =>
+        {
+            return Catch(async () =>
             {
                 var command = new CreateUserCommand(userDto);
-                await _messages.DispatchCommand(command);
+                await MessageBus.DispatchCommand(command);
                 return true;
             });
+        }
 
         [Authorize]
         [HttpGet("Authorize_Test")]
         public async Task<IActionResult> AuthorizeOnly()
         {
+            _eventBus.PublishEvent(new UserAuthorizedEvt {Id = "user id", Name = "Dima", UserName = "Dimasik"});
             return await Task.FromResult(Ok());
         }
     }

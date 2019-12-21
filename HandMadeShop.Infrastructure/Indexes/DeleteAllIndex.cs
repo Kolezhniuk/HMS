@@ -1,6 +1,6 @@
 using Raven.Client.Documents.Session;
 
-namespace HandMadeShop.Persistence.Indexes
+namespace HandMadeShop.Infrastrucutre.Indexes
 {
     public class DeleteAllIndex
     {

@@ -1,16 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HandMadeShop.Dtos.DeliveryMethod;
-using HandMadeShop.Logic.Interfaces;
+using HandMadeShop.Infrastrucutre.Interfaces;
 
-namespace HandMadeShop.Logic.Domain.DeliveryMethod.Queries
+namespace HandMadeShop.Infrastrucutre.Domain.DeliveryMethod.Queries
 {
     internal sealed class GetListQueryHandler : IQueryHandler<GetListQuery, IEnumerable<DeliveryMethodDto>>
     {
-        public GetListQueryHandler()
-        {
-        }
-
         public async Task<IEnumerable<DeliveryMethodDto>> Handle(GetListQuery query)
         {
             return await Task.FromResult(new List<DeliveryMethodDto>());

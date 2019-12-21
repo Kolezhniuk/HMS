@@ -1,4 +1,4 @@
-namespace HandMadeShop.Logic.Interfaces
+namespace HandMadeShop.Infrastrucutre.Interfaces
 {
     public interface IQuery<TResult>
     {

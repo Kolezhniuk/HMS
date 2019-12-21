@@ -16,17 +16,18 @@ namespace HandMadeShop.Api
             CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IHostBuilder CreateWebHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((builder, context) =>
                 {
                     var alias = Environment.UserName.Replace(" ", string.Empty);
 
                     context.SetBasePath(Directory.GetCurrentDirectory())
-                        .AddJsonFile("appsettings.json", optional: true)
-                        .AddJsonFile($"appsettings.{builder.HostingEnvironment.EnvironmentName}.json", optional: true,
-                            reloadOnChange: true)
-                        .AddJsonFile($"appsettings.{alias}.json", optional: true, reloadOnChange: true);
+                        .AddJsonFile("appsettings.json", true)
+                        .AddJsonFile($"appsettings.{builder.HostingEnvironment.EnvironmentName}.json", true,
+                            true)
+                        .AddJsonFile($"appsettings.{alias}.json", true, true);
                 })
                 .UseSerilog((hostingContext, loggerConfiguration) =>
                     loggerConfiguration
@@ -41,5 +42,6 @@ namespace HandMadeShop.Api
                         })
                 )
                 .ConfigureWebHostDefaults(builder => { builder.UseStartup<Startup>(); });
+        }
     }
 }

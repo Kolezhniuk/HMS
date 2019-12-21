@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-using HandMadeShop.Core.DomainEntities;
+using HandMadeShop.Infrastrucutre.DomainEntities;
 using Raven.Client.Documents;
 using Raven.Client.Exceptions.Database;
+using Raven.Client.ServerWide;
 using Raven.Client.ServerWide.Operations;
+using Raven.Identity;
 
 namespace HandMadeShop.Api.Extensions
 {
@@ -21,7 +23,7 @@ namespace HandMadeShop.Api.Extensions
             catch (DatabaseDoesNotExistException)
             {
                 store.Maintenance.Server.Send(new CreateDatabaseOperation(
-                    new Raven.Client.ServerWide.DatabaseRecord
+                    new DatabaseRecord
                     {
                         DatabaseName = store.Database
                     }));
@@ -35,21 +37,16 @@ namespace HandMadeShop.Api.Extensions
             using (var dbSession = docStore.OpenSession())
             {
                 var roleIds = roleNames.Select(r => "IdentityRoles/" + r);
-                var roles = dbSession.Load<Raven.Identity.IdentityRole>(roleIds);
+                var roles = dbSession.Load<IdentityRole>(roleIds);
                 foreach (var idRolePair in roles)
-                {
                     if (idRolePair.Value == null)
                     {
                         var id = idRolePair.Key;
                         var roleName = id.Replace("IdentityRoles/", string.Empty);
-                        dbSession.Store(new Raven.Identity.IdentityRole(roleName), id);
+                        dbSession.Store(new IdentityRole(roleName), id);
                     }
-                }
 
-                if (roles.Any(i => i.Value == null))
-                {
-                    dbSession.SaveChanges();
-                }
+                if (roles.Any(i => i.Value == null)) dbSession.SaveChanges();
             }
 
             return docStore;

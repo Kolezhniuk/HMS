@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
+using HandMadeShop.Infrastrucutre.Utils.Decorators;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
-using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Product.Commands

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
-        <RootNamespace>HandMadeShop.Persistence</RootNamespace>
+        <RootNamespace>HandMadeShop.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,8 +11,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Messaging"/>
-        <Folder Include="Utils"/>
+        <ProjectReference Include="..\HandMadeShop.Core\HandMadeShop.Core.csproj"/>
+        <ProjectReference Include="..\HandMadeShop.Logic\HandMadeShop.Logic.csproj"/>
     </ItemGroup>
 
 

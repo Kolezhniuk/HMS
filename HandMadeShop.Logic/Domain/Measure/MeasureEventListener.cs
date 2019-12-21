@@ -1,45 +1,32 @@
 using System;
-using System.Reactive.Linq;
-using HandMadeShop.Core;
+using HandMadeShop.Infrastrucutre.Domain.Product;
+using HandMadeShop.Logic.Domain.User.Events;
+using HandMadeShop.Logic.Utils;
 using Microsoft.Extensions.Logging;
 
 namespace HandMadeShop.Logic.Domain.Measure
 {
-    public class MeasureEventListener<T> : IDisposable where T : DomainEvent
+    public class MeasureEventListener
     {
+        private readonly EventBus _eventBus;
         private readonly ILogger _logger;
-        private readonly RxEventWrapper _rxEventWrapper;
-        private IDisposable _subscribtion;
 
-        public MeasureEventListener(RxEventWrapper rxEventWrapper, ILogger<MeasureEventListener<T>> logger)
+        public MeasureEventListener(EventBus eventBus, ILogger<MeasureEventListener> logger)
         {
-            _rxEventWrapper = rxEventWrapper;
+            _eventBus = eventBus;
             _logger = logger;
         }
 
-        public void Dispose()
+        public IDisposable HandleProductCreatedEvent()
         {
-            ReleaseUnmanagedResources();
-            GC.SuppressFinalize(this);
+            return _eventBus.Of<ProductCreatedEvent>()
+                .Subscribe(evt => { _logger.LogError($"ProductCreatedEvent {evt.Id}, {evt.Name} "); });
         }
 
-        public void Listen()
+        public IDisposable HandleUserAuthorizedEvent()
         {
-            _subscribtion = _rxEventWrapper
-                .Observable
-                .OfType<T>()
-                .Subscribe(evt
-                    => _logger.LogError($"Event {nameof(evt)} happened Id: {evt.Id} Info: {evt.Name} "));
-        }
-
-        private void ReleaseUnmanagedResources()
-        {
-            _subscribtion.Dispose();
-        }
-
-        ~MeasureEventListener()
-        {
-            ReleaseUnmanagedResources();
+            return _eventBus.Of<UserAuthorizedEvt>()
+                .Subscribe(evt => { _logger.LogError($"UserAuthorizedEvt {evt.Id}, {evt.Name}, {evt.UserName} "); });
         }
     }
 }

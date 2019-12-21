@@ -1,10 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using HandMadeShop.Core;
 using HandMadeShop.Dtos.Product;
+using HandMadeShop.Infrastrucutre.Domain.Product;
+using HandMadeShop.Infrastrucutre.Utils.Decorators;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
-using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Product.Commands
@@ -57,18 +57,18 @@ namespace HandMadeShop.Logic.Domain.Product.Commands
         [AuditLog]
         public class AddProductCommandHandler : ICommandHandler<AddProductCommand>
         {
+            private readonly EventBus _eventBus;
             private readonly IAsyncDocumentSession _session;
-            private readonly RxEventWrapper _wrapper;
 
-            public AddProductCommandHandler(IAsyncDocumentSession session, RxEventWrapper wrapper)
+            public AddProductCommandHandler(IAsyncDocumentSession session, EventBus eventBus)
             {
                 _session = session;
-                _wrapper = wrapper;
+                _eventBus = eventBus;
             }
 
             public async Task<CommandResult> Handle(AddProductCommand command)
             {
-                var product = new Core.DomainEntities.Product
+                var product = new Infrastrucutre.DomainEntities.Product
                 {
                     Name = command.Name,
                     Description = command.Description,
@@ -94,7 +94,7 @@ namespace HandMadeShop.Logic.Domain.Product.Commands
                 await _session.StoreAsync(product);
                 await _session.SaveChangesAsync();
 
-                _wrapper.Subject.OnNext(new ProductEvent() {Id = product.Id, Name = "Product Created"});
+                _eventBus.PublishEvent(new ProductCreatedEvent {Id = product.Id, Name = "Product Created"});
 
                 return CommandResult.Ok(product.Id);
             }

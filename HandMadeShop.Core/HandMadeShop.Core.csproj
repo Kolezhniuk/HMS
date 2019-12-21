@@ -2,11 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <RootNamespace>HandMadeShop.Core</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="RavenDB.Identity" Version="7.0.0"/>
         <PackageReference Include="System.Reactive" Version="4.3.1"/>
+        <PackageReference Include="System.Text.Json" Version="4.7.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Utils"/>
     </ItemGroup>
 
 </Project>

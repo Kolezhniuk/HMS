@@ -5,18 +5,18 @@ using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Identity;
 using Raven.Client.Documents.Session;
 
-namespace HandMadeShop.Logic.Domain.User.Commands
+namespace HandMadeShop.Infrastrucutre.Domain.User.Commands
 {
     public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand>
     {
         private readonly IAsyncDocumentSession _session;
-        private readonly SignInManager<Core.DomainEntities.User> _signInManager;
-        private readonly UserManager<Core.DomainEntities.User> _userManager;
+        private readonly SignInManager<DomainEntities.User> _signInManager;
+        private readonly UserManager<DomainEntities.User> _userManager;
 
         public CreateUserCommandHandler(
             IAsyncDocumentSession session,
-            UserManager<Core.DomainEntities.User> userManager,
-            SignInManager<Core.DomainEntities.User> signInManager)
+            UserManager<DomainEntities.User> userManager,
+            SignInManager<DomainEntities.User> signInManager)
         {
             _session = session;
             _userManager = userManager;
@@ -25,11 +25,11 @@ namespace HandMadeShop.Logic.Domain.User.Commands
 
         public async Task<CommandResult> Handle(CreateUserCommand command)
         {
-            var newUser = new Core.DomainEntities.User
+            var newUser = new DomainEntities.User
             {
                 UserName = command.NewUserDto.FirstName,
                 LastName = command.NewUserDto.LastName,
-                Email = command.NewUserDto.Email,
+                Email = command.NewUserDto.Email
             };
 
             var createUserResult = await _userManager.CreateAsync(newUser, command.NewUserDto.Password);

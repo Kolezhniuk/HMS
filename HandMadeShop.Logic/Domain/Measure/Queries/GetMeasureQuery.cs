@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
 using HandMadeShop.Dtos.Measure;
-using HandMadeShop.Logic.Interfaces;
+using HandMadeShop.Infrastrucutre.Interfaces;
 using Raven.Client.Documents.Session;
 
-namespace HandMadeShop.Logic.Domain.Measure.Queries
+namespace HandMadeShop.Infrastrucutre.Domain.Measure.Queries
 {
     public class GetMeasureQuery : IQuery<MeasureDto>
     {
@@ -20,7 +20,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Queries
 
             public async Task<MeasureDto> Handle(GetMeasureQuery query)
             {
-                var measure = await _session.LoadAsync<Core.DomainEntities.Measure>(query.Id);
+                var measure = await _session.LoadAsync<DomainEntities.Measure>(query.Id);
 
                 return new MeasureDto
                 {

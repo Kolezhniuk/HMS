@@ -1,6 +1,6 @@
 using HandMadeShop.Logic.Interfaces;
 
-namespace HandMadeShop.Logic.Domain.DeliveryMethod.Commands
+namespace HandMadeShop.Infrastrucutre.Domain.DeliveryMethod.Commands
 {
     public sealed class CreateDeliveryMethodCommand : ICommand
     {
