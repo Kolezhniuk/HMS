@@ -1,4 +1,8 @@
-﻿using HandMadeShop.Api.Actions;
+﻿using System.Reflection;
+using FluentValidation.AspNetCore;
+using HandMadeShop.Api.Actions;
+using HandMadeShop.Dtos.Measure;
+using HandMadeShop.Logic.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,7 +28,12 @@ namespace HandMadeShop.Api
             services.AddAuthentication();
             services.AddAuthorization();
             services.AddSwaggerConfiguration();
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation(fv =>
+                fv.RegisterValidatorsFromAssemblies(new[]
+                {
+                    Assembly.GetAssembly(typeof(ICommand)),
+                    Assembly.GetAssembly(typeof(WriteMeasureDto)),
+                }));
             services.AddProjectServices();
         }
 

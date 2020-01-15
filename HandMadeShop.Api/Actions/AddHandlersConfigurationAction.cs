@@ -107,6 +107,7 @@ namespace HandMadeShop.Api.Actions
             if (type == typeof(AuditLogAttribute))
                 return typeof(AuditLoggingDecorator<>);
 
+
             throw new ArgumentException(attribute.ToString());
         }
 

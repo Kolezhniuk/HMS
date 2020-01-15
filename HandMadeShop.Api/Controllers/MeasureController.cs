@@ -43,6 +43,7 @@ namespace HandMadeShop.Api.Controllers
         {
             return Catch(async () =>
             {
+                ThrowIfModelInvalid();
                 var command = new AddMeasureCommand(dto.Name, dto.Position);
                 var result = await MessageBus.DispatchCommand(command);
                 return result.Payload;
