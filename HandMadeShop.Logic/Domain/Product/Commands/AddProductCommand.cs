@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using HandMadeShop.Dtos.Product;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
-using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Product.Commands
@@ -53,16 +52,15 @@ namespace HandMadeShop.Logic.Domain.Product.Commands
         public int ReviewsCount { get; set; }
         public double? RatingAverage { get; set; }
 
-        [AuditLog]
         public class AddProductCommandHandler : ICommandHandler<AddProductCommand>
         {
-            private readonly EventBus _eventBus;
+            private readonly MessageBus _messageBus;
             private readonly IAsyncDocumentSession _session;
 
-            public AddProductCommandHandler(IAsyncDocumentSession session, EventBus eventBus)
+            public AddProductCommandHandler(IAsyncDocumentSession session, MessageBus messageBus)
             {
                 _session = session;
-                _eventBus = eventBus;
+                _messageBus = messageBus;
             }
 
             public async Task<CommandResult> Handle(AddProductCommand command)
@@ -93,7 +91,7 @@ namespace HandMadeShop.Logic.Domain.Product.Commands
                 await _session.StoreAsync(product);
                 await _session.SaveChangesAsync();
 
-                _eventBus.PublishEvent(new ProductCreatedEvent {Id = product.Id, Name = "Product Created"});
+                await _messageBus.PublishEvent(new ProductCreatedEvent {Id = product.Id, Name = "Product Created"});
 
                 return CommandResult.Ok(product.Id);
             }

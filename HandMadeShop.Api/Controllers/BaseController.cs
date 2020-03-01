@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using HandMadeShop.Api.Extensions;
 using HandMadeShop.Api.Utils;
-using HandMadeShop.Infrastructure.Messaging;
+using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 

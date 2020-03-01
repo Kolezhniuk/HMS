@@ -14,7 +14,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
 
         public string Id { get; }
 
-        internal sealed class DeleteMeasureCommandHandler : ICommandHandler<DeleteMeasureCommand>
+        public sealed class DeleteMeasureCommandHandler : ICommandHandler<DeleteMeasureCommand>
         {
             private readonly IAsyncDocumentSession _session;
 

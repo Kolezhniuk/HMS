@@ -19,7 +19,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
         public string Name { get; }
         public int Position { get; }
 
-        internal sealed class UpdateMeasureCommandHandler : ICommandHandler<UpdateMeasureCommand>
+        public sealed class UpdateMeasureCommandHandler : ICommandHandler<UpdateMeasureCommand>
         {
             private readonly IAsyncDocumentSession _session;
 

@@ -9,7 +9,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Queries
     {
         public string Id { get; set; }
 
-        internal sealed class GetMeasureQueryHandler : IQueryHandler<GetMeasureQuery, MeasureDto>
+        public sealed class GetMeasureQueryHandler : IQueryHandler<GetMeasureQuery, MeasureDto>
         {
             private readonly IAsyncDocumentSession _session;
 

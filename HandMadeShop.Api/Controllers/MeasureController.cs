@@ -4,9 +4,9 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using HandMadeShop.Api.Utils;
 using HandMadeShop.Dtos.Measure;
-using HandMadeShop.Infrastructure.Messaging;
 using HandMadeShop.Logic.Domain.Measure.Commands;
 using HandMadeShop.Logic.Domain.Measure.Queries;
+using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -25,14 +25,16 @@ namespace HandMadeShop.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var result = await MessageBus.PublishQuery(new GetAllMeasuresQuery());
+            var result = await MessageBus
+                .PublishQuery<GetAllMeasuresQuery, IEnumerable<MeasureDto>>(new GetAllMeasuresQuery());
             return Ok(result);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
-            var result = await MessageBus.PublishQuery(new GetMeasureQuery {Id = Uri.UnescapeDataString(id)});
+            var result = await MessageBus.PublishQuery<GetMeasureQuery, MeasureDto>
+                (new GetMeasureQuery {Id = Uri.UnescapeDataString(id)});
             return Ok(result);
         }
 
@@ -62,7 +64,6 @@ namespace HandMadeShop.Api.Controllers
             });
         }
 
-        //TODO think about escaping string id.
         [HttpPut("update/{id}")]
         public Task<ApiResponse<bool>> Bulk(string id, WriteMeasureDto dto)
         {

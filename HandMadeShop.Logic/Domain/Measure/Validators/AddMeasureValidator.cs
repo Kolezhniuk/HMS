@@ -7,7 +7,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Validators
     {
         public AddMeasureValidator()
         {
-            RuleFor(x => x.Name).Length(3);
+            RuleFor(x => x.Name).EmailAddress();
         }
     }
 }

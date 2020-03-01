@@ -5,7 +5,7 @@ using HandMadeShop.Logic.Interfaces;
 
 namespace HandMadeShop.Logic.Domain.Category.Queries
 {
-    internal sealed class GetCategoriesQueryHandler : IQueryHandler<GetCategoriesQuery, IEnumerable<CategoryDto>>
+    public sealed class GetCategoriesQueryHandler : IQueryHandler<GetCategoriesQuery, IEnumerable<CategoryDto>>
     {
         public async Task<IEnumerable<CategoryDto>> Handle(GetCategoriesQuery query)
         {

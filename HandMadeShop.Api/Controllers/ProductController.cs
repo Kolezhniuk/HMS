@@ -3,9 +3,9 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using HandMadeShop.Api.Utils;
 using HandMadeShop.Dtos.Product;
-using HandMadeShop.Infrastructure.Messaging;
 using HandMadeShop.Logic.Domain.Product.Commands;
 using HandMadeShop.Logic.Domain.Product.Queries;
+using HandMadeShop.Logic.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
@@ -26,7 +26,9 @@ namespace HandMadeShop.Api.Controllers
         [HttpGet]
         public Task<ApiResponse<IEnumerable<ProductListDto>>> GetAll()
         {
-            return Catch(async () => await MessageBus.PublishQuery(new GetAllProductsQuery()));
+            return Catch(async () =>
+                await MessageBus.PublishQuery<GetAllProductsQuery, IEnumerable<ProductListDto>>
+                    (new GetAllProductsQuery()));
         }
 
 

@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
-using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Product.Commands
@@ -15,7 +14,6 @@ namespace HandMadeShop.Logic.Domain.Product.Commands
 
         public string Id { get; }
 
-        [AuditLog]
         public class DeleteProductCommandHandler : ICommandHandler<DeleteProductCommand>
         {
             private readonly IAsyncDocumentSession _session;

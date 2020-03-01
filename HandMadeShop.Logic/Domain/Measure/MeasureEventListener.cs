@@ -1,32 +1,32 @@
-using System;
+using System.Threading.Tasks;
 using HandMadeShop.Logic.Domain.Product;
 using HandMadeShop.Logic.Domain.User.Events;
-using HandMadeShop.Logic.Utils;
+using HandMadeShop.Logic.Interfaces;
 using Microsoft.Extensions.Logging;
 
 namespace HandMadeShop.Logic.Domain.Measure
 {
-    public class MeasureEventListener
+    public class MeasureEventListener :
+        IEventHandler<ProductCreatedEvent>,
+        IEventHandler<UserAuthorizedEvt>
     {
-        private readonly EventBus _eventBus;
         private readonly ILogger _logger;
 
-        public MeasureEventListener(EventBus eventBus, ILogger<MeasureEventListener> logger)
+        public MeasureEventListener(ILogger<MeasureEventListener> logger)
         {
-            _eventBus = eventBus;
             _logger = logger;
         }
 
-        public IDisposable HandleProductCreatedEvent()
+        public Task Handle(ProductCreatedEvent @event)
         {
-            return _eventBus.Of<ProductCreatedEvent>()
-                .Subscribe(evt => { _logger.LogError($"ProductCreatedEvent {evt.Id}, {evt.Name} "); });
+            _logger.LogError($" Product created {@event.Id}, {@event.Name}");
+            return Task.CompletedTask;
         }
 
-        public IDisposable HandleUserAuthorizedEvent()
+        public Task Handle(UserAuthorizedEvt @event)
         {
-            return _eventBus.Of<UserAuthorizedEvt>()
-                .Subscribe(evt => { _logger.LogError($"UserAuthorizedEvt {evt.Id}, {evt.Name}, {evt.UserName} "); });
+            _logger.LogError($" User authorized event {@event.Id}, {@event.UserName}");
+            return Task.CompletedTask;
         }
     }
 }

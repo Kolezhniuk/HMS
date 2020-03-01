@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using HandMadeShop.Dtos.Product;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
-using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Product.Commands
@@ -56,7 +55,6 @@ namespace HandMadeShop.Logic.Domain.Product.Commands
         public int ReviewsCount { get; set; }
         public double? RatingAverage { get; set; }
 
-        [AuditLog]
         public class UpdateProductCommandHandler : ICommandHandler<UpdateProductCommand>
         {
             private readonly IAsyncDocumentSession _session;

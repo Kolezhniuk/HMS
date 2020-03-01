@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using HandMadeShop.Dtos.Measure;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
-using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents;
 
 namespace HandMadeShop.Logic.Domain.Measure.Commands
@@ -18,8 +17,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
 
         public List<WriteMeasureDto> MeasureDtos { get; }
 
-        [AuditLog]
-        internal sealed class BulkInsertMeasureCommandHandler : ICommandHandler<BulkInsertMeasureCommand>
+        public sealed class BulkInsertMeasureCommandHandler : ICommandHandler<BulkInsertMeasureCommand>
         {
             private readonly IDocumentStore _store;
 

@@ -6,13 +6,13 @@ using Microsoft.Extensions.Logging;
 
 namespace HandMadeShop.Logic.Utils.Decorators
 {
-    public sealed class AuditLoggingDecorator<TCommand> : ICommandHandler<TCommand>
+    public sealed class LoggingCommandDecorator<TCommand> : ICommandHandler<TCommand>
         where TCommand : ICommand
     {
         private readonly ICommandHandler<TCommand> _handler;
         private readonly ILogger<ICommandHandler<TCommand>> _logger;
 
-        public AuditLoggingDecorator(ICommandHandler<TCommand> handler, ILogger<ICommandHandler<TCommand>> logger)
+        public LoggingCommandDecorator(ICommandHandler<TCommand> handler, ILogger<ICommandHandler<TCommand>> logger)
         {
             _logger = logger;
             _handler = handler;

@@ -11,7 +11,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Queries
 {
     public class GetAllMeasuresQuery : IQuery<IEnumerable<MeasureDto>>
     {
-        internal sealed class GetALLMeasuresQueryHandler : IQueryHandler<GetAllMeasuresQuery, IEnumerable<MeasureDto>>
+        public sealed class GetALLMeasuresQueryHandler : IQueryHandler<GetAllMeasuresQuery, IEnumerable<MeasureDto>>
         {
             private readonly ILogger<IQueryHandler<GetAllMeasuresQuery, IEnumerable<MeasureDto>>> _logger;
             private readonly IAsyncDocumentSession _session;

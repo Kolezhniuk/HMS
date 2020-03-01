@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Autofac;
 using FluentValidation.AspNetCore;
 using HandMadeShop.Api.Actions;
 using HandMadeShop.Dtos.Measure;
@@ -23,8 +24,7 @@ namespace HandMadeShop.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddStorage();
-            services.RegisterHandlers();
-            services.AddProjectServices();
+            // services.RegisterHandlers();
             services.AddAuthentication();
             services.AddAuthorization();
             services.AddSwaggerConfiguration();
@@ -34,11 +34,9 @@ namespace HandMadeShop.Api
                     Assembly.GetAssembly(typeof(ICommand)),
                     Assembly.GetAssembly(typeof(WriteMeasureDto)),
                 }));
-            services.AddProjectServices();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            AddEventHandlersConfiguration configuration)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.EnvironmentName == Environments.Development) app.UseDeveloperExceptionPage();
 
@@ -49,7 +47,11 @@ namespace HandMadeShop.Api
             app.InitDatabase();
             app.SeedData();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            configuration.UseListeners();
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterModule(new AutofacModule());
         }
     }
 }

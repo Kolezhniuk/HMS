@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using HandMadeShop.Logic.Interfaces;
 using HandMadeShop.Logic.Utils;
-using HandMadeShop.Logic.Utils.Decorators;
 using Raven.Client.Documents.Session;
 
 namespace HandMadeShop.Logic.Domain.Measure.Commands
@@ -17,8 +16,7 @@ namespace HandMadeShop.Logic.Domain.Measure.Commands
         public string Name { get; }
         public int Position { get; }
 
-        [AuditLog]
-        internal sealed class AddMeasureCommandHandler : ICommandHandler<AddMeasureCommand>
+        public sealed class AddMeasureCommandHandler : ICommandHandler<AddMeasureCommand>
         {
             private readonly IAsyncDocumentSession _session;
 

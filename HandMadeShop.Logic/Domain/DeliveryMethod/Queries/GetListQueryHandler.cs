@@ -5,7 +5,7 @@ using HandMadeShop.Logic.Interfaces;
 
 namespace HandMadeShop.Logic.Domain.DeliveryMethod.Queries
 {
-    internal sealed class GetListQueryHandler : IQueryHandler<GetListQuery, IEnumerable<DeliveryMethodDto>>
+    public sealed class GetListQueryHandler : IQueryHandler<GetListQuery, IEnumerable<DeliveryMethodDto>>
     {
         public async Task<IEnumerable<DeliveryMethodDto>> Handle(GetListQuery query)
         {
