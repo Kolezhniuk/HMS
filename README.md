@@ -1,7 +1,7 @@
 # HandMadeShop
 
-# This is repo to implement CQRS principle
-# Thi was implemented with 
+## This is repo to implement CQRS principle
+## Thi was implemented with 
 - Asp Core 3.1
 - Web.API
 - FluentValidation
@@ -10,9 +10,9 @@
 - EF core
 - Asp Core Identity
 
-# Database -  RavenDB NoSql 
+## Database -  RavenDB NoSql 
 
-# Logs could be watched on Kibana
+## Logs could be watched on Kibana
 
 Hand Made Shop
 ** Possibly deprecated
