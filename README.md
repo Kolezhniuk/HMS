@@ -1,4 +1,19 @@
 # HandMadeShop
+
+# This is repo to implement CQRS principle
+# Thi was implemented with 
+- Asp Core 3.1
+- Web.API
+- FluentValidation
+- Autofac
+- Serilog
+- EF core
+- Asp Core Identity
+
+# Database -  RavenDB NoSql 
+
+# Logs could be watched on Kibana
+
 Hand Made Shop
 ** Possibly deprecated
  * Add migration `dotnet ef migrations add initial  --project="HandmadeShop.Domain" --startup-project="HandMadeShop.Api"
@@ -18,5 +33,5 @@ Hand Made Shop
     - https://github.com/TribalScale/kafka-waffle-stack
     
 * Notes
-    - probably each member of team must have community license of Raven Db | https://ravendb.net/license/request/community
+    - community license of Raven Db | https://ravendb.net/license/request/community
         
